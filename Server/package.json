@@ -1,0 +1,12 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=.env index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
