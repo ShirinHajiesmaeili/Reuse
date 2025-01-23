@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import basket from "../assets/images/basket.png";
 
 const Navbar = () => {
   return (
@@ -63,7 +64,7 @@ const Navbar = () => {
         {/* Icons */}
         <div className="flex items-center space-x-5">
           <img
-            src="language.png"
+            src={basket}
             alt="Language"
             className="h-7 w-auto cursor-pointer hover:scale-125 transition-transform duration-300"
           />
