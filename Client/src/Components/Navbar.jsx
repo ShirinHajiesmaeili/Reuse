@@ -4,7 +4,11 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between px-10 py-5">
       {/* SVG Logo */}
-      <img src="Logo.png" alt="logo" className="h-36 object-contain" />
+      <img
+        src="Reuse.Logo.426x217.png"
+        alt="logo"
+        className="h-36 object-contain"
+      />
 
       {/* Navigation Items */}
       <ul className="flex items-center space-x-10 text-secondary text-lg font-semibold">
