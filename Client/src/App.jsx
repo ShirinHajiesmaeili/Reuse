@@ -1,32 +1,26 @@
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import Detail from "./pages/Detail";
+import { CartProvider } from './context/CartContext';
+import Home from "./pages/Home";
+import ShopItems from "./pages/ShopItems";
 
-import { BrowserRouter,  Routes, Route } from "react-router-dom";
-import Layout from "./layout/Layout";
-import Detail from "./Pages/Detail";
-import { CartProvider } from './Context/CartContext';
-import Searchbar from "./Components/Searchbar";
-import Chatbot from "./Components/Chatbot";
-import Home from "./Pages/Home";
-//import Signup from "./Pages/Signup";
-import Cart from "./Components/Cart";
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<MainLayout />}>
+      <Route index element={<Home />} />
+      <Route path="shop-items" element={<ShopItems />} />
+      <Route path="product/:id" element={<Detail />} />
+    </Route>
+  )
+);
 
-
-function App() {
-    return (
-        <CartProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        <Route index element={<Home />} />
-                        <Route path="/product/:id" element={<Detail />} />
-                        <Route path="/searchbar" element={<Searchbar />} />
-                        <Route path="/cart" element={<Cart />} />
-                        {/*<Route path="/signup" element={<Signup />} />*/}
-                    </Route>
-                   
-                </Routes>
-            </BrowserRouter>
-        </CartProvider>
-    );
-}
+const App = () => {
+  return (
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  );
+};
 
 export default App;

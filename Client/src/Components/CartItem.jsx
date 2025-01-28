@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { CartContext } from '../Context/CartContext';
+import { CartContext } from '../context/CartContext';
 
 const CartItem = (props) => {
     const { productId, quantity } = props.data;
@@ -24,7 +24,7 @@ const CartItem = (props) => {
 
     if (loading) {
         return (
-            <div className='flex justify-between items-center bg-slate-600 text-white p-4 rounded-md animate-pulse'>
+            <div className='flex justify-between items-center bg-lavender text-white p-4 rounded-md animate-pulse'>
                 <div className='w-12 h-12 bg-slate-500 rounded'></div>
                 <div className='flex-1 mx-4'>
                     <div className='h-4 bg-slate-500 rounded w-3/4'></div>
@@ -51,7 +51,7 @@ const CartItem = (props) => {
     };
 
     return (
-        <div className='flex justify-between items-center bg-slate-600 text-white p-4 rounded-md'>
+        <div className='flex justify-between items-center bg-lavender text-white p-4 rounded-md'>
             <img 
                 src={product.image} 
                 alt={product.title} 
@@ -59,7 +59,7 @@ const CartItem = (props) => {
             />
             <div className='flex-1 mx-4'>
                 <h3 className='text-sm line-clamp-1'>{product.title}</h3>
-                <p className='text-sm text-gray-300'>${(product.price * quantity).toFixed(2)}</p>
+                <p className='text-sm text-gray-100 font-medium'>{(product.price * quantity).toFixed(2)} €</p>
             </div>
             <div className='flex items-center gap-2'>
                 <button 

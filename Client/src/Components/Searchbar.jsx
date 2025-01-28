@@ -1,7 +1,8 @@
 import React from "react";
 
 const Searchbar = () => {
-  return (
+  return ( 
+  <div className="w-full bg-white p-4 shadow-md rounded-lg">
     <form className="flex space-x-1 bg-secondary rounded-full shadow-md px-1 py-1 fontFamily:Rethink Sans, serif">
       <input
         type="text"
@@ -43,7 +44,9 @@ const Searchbar = () => {
       >
         Search
       </button>
+      
     </form>
+    </div>
   );
 };
 
