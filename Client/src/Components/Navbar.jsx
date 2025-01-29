@@ -1,19 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Logo from "../assets/images/Logo.png";
-import Cart from "../components/Cart";
-import Searchbar from "../components/Searchbar";
-import Video from "../components/Video";
+import Cart from "./Cart";
+import Searchbar from "./Searchbar";
+import { CartContext } from '../context/CartContext';
 
 const Navbar = () => {
+  const { setStatusTab } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    navigate('/');
+  };
+
+  const handleCartClick = (e) => {
+    e.preventDefault();
+    setStatusTab(true);
+  };
+
   return (
     <div className="top-0 w-full z-50 flex flex-col items-center justify-between px-16 py-5 fontFamily:'Rethink Sans', serif">
       <div className="flex items-center justify-between w-full">
-        {/* Logo */}
-        <Link to="/">
-          <img src={Logo} alt="logo" className="h-20 object-contain" />
-        </Link>
+        {/* Logo with Effects */}
+        <div onClick={handleLogoClick} className="cursor-pointer">
+          <div className="logo-container relative overflow-hidden group">
+            <img 
+              src={Logo} 
+              alt="logo" 
+              className="h-20 object-contain blur-sm animate-sharpness
+                         group-hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]
+                         transition-all duration-700 ease-in-out"
+            />
+            <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent
+                          -translate-x-full animate-shimmer" />
+          </div>
+        </div>
 
         {/* Navigation Items */}
         <ul className="flex justify-center space-x-10 text-secondary text-lg font-semibold mr-10">
@@ -79,9 +102,9 @@ const Navbar = () => {
           </Link>
 
           {/* Cart Component */}
-          <Link to="/cart">
+          <div onClick={handleCartClick}>
             <Cart />
-          </Link>
+          </div>
         </div>
       </div>
 
@@ -89,9 +112,6 @@ const Navbar = () => {
       <Link to="/search">
         <Searchbar />
       </Link>
-
-      {/* Video Section */}
-      <Video />
     </div>
   );
 };
