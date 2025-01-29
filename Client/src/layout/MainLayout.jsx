@@ -70,11 +70,13 @@ const Layout = () => {
         className={`w-full max-w-[1200px] mx-auto p-5 transform transition-transform duration-500
         ${statusTab ? "-translate-x-48" : ""}`}
       >
+        
         <Navbar />
         <Outlet />
       </main>
       <CartTab />
-      <Footer />
+       <Footer />  
+       
       
       {/* Chatbot Integration - Left Side */}
       {!isChatOpen ? (
