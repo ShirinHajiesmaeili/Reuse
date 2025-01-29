@@ -138,7 +138,7 @@ const Signup = ({ onClose }) => {
   const renderSignUp = () => (
     <>
       <h2 className="text-center text-3xl font-extrabold text-gray-900">
-        Create Account
+        Create an Account
       </h2>
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
@@ -204,7 +204,7 @@ const Signup = ({ onClose }) => {
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         >
-          Create Account
+          Create an Account
         </button>
 
         <div className="text-center">
