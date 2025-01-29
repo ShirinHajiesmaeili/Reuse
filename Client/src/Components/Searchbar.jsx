@@ -2,7 +2,7 @@ import React from "react";
 
 const Searchbar = () => {
   return ( 
-  <div className="w-full bg-white p-4 shadow-md rounded-lg">
+  <div className="">
     <form className="flex space-x-1 bg-secondary rounded-full shadow-md px-1 py-1 fontFamily:Rethink Sans, serif">
       <input
         type="text"
