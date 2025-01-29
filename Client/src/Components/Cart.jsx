@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
+  const { items } = useContext(CartContext);
+
+  // Calculate total number of items in cart
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="indicator">
       <span className="indicator-item badge bg-primary border-primary h-4 w-4 text-white">
-        0
+        {totalItems}
       </span>
 
       <svg
