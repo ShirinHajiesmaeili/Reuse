@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import ProductCard from '../components/ProductCard';
 import { CartContext } from '../context/CartContext';
-import TopNavigation from '../components/TopNavigation';
 import Footer from '../components/Footer';
 
 const ShopItems = () => {
@@ -28,7 +27,7 @@ const ShopItems = () => {
     if (loading) {
         return (
             <>
-                <TopNavigation />
+               
                 <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-softBlue via-lavender to-endPurple">
                     <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-secondary"></div>
                 </div>
@@ -40,7 +39,7 @@ const ShopItems = () => {
     if (error) {
         return (
             <>
-                <TopNavigation />
+             
                 <div className="text-center py-10 text-danger bg-gradient-to-b from-softBlue via-lavender to-endPurple min-h-screen">
                     <p>{error}</p>
                     <button 
@@ -57,7 +56,7 @@ const ShopItems = () => {
 
     return (
         <>
-            <TopNavigation />
+            
             <div className="min-h-screen bg-gradient-to-b from-softBlue via-lavender to-endPurple">
                 <div className="max-w-7xl mx-auto px-4 py-8">
                     <h1 className='text-5xl font-bold text-secondary tracking-wider my-12 text-center'>

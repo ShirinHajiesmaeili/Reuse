@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
-import TopNavigation from '../components/TopNavigation';
+
 import Footer from '../components/Footer';
 
 const Detail = () => {
