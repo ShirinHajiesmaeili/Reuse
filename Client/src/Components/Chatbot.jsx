@@ -25,7 +25,7 @@ const Chatbot = () => {
   if (!isOpen) {
     return (
       <div
-        className="fixed bottom-5 right-5 w-30 h-10 p-4 flex items-center justify-center bg-tertiary text-white rounded-full cursor-pointer shadow-lg"
+        className="fixed bottom-5 right-5 w-30 h-10 p-4 flex items-center justify-center text-white rounded-full cursor-pointer shadow-lg"
         onClick={() => setIsOpen(true)}
       >
         <span className="text-2xl text-white">Chat 💬</span>
@@ -56,7 +56,7 @@ const Chatbot = () => {
             className={`mb-3 max-w-xs p-2 rounded-lg text-sm ${
               msg.sender === "user"
                 ? "self-end text-right text-primary"
-                : " self-start text-left text-secondary"
+                : " self-start text-left text-tertiary"
             }`}
           >
             {msg.text}
@@ -71,11 +71,11 @@ const Chatbot = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-tertiary text-primary"
+          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-tertiary"
         />
         <button
           onClick={handleSend}
-          className="ml-2 px-4 py-2 bg-tertiary text-white font-semibold rounded-lg hover:bg-tertiary focus:ring-2 focus:ring-primary"
+          className="ml-2 px-4 py-2 bg-secondary font-semibold rounded-lg hover:bg-secondary focus:ring-2 focus:ring-secondary"
         >
           Send
         </button>

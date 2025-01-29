@@ -1,9 +1,8 @@
-import React from "react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-secondary text-base-content p-10 fontFamily:Rethink Sans, serif">
+    <footer className="bottom-0 w-full footer bg-secondary text-base-content fontFamily:Rethink Sans, serif mt-auto p-9">
       <nav>
         <h6 className="footer-title text-white">Company</h6>
         <a>

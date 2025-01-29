@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import CartTab from '../components/CartTab';
-import { CartContext } from '../context/CartContext';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React, { useContext, useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import CartTab from "../components/CartTab";
+import { CartContext } from "../context/CartContext";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Layout = () => {
   const { statusTab } = useContext(CartContext);
@@ -16,10 +16,14 @@ const Layout = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const totalScroll = (document.documentElement.scrollHeight - window.innerHeight) / 2;
+      const totalScroll =
+        (document.documentElement.scrollHeight - window.innerHeight) / 2;
       const rawProgress = (window.scrollY / totalScroll) * 100;
       // Add easing function for smoother transition
-      const easedProgress = Math.min(Math.easeOutQuad(rawProgress / 100) * 100, 100);
+      const easedProgress = Math.min(
+        Math.easeOutQuad(rawProgress / 100) * 100,
+        100
+      );
       setScrollProgress(easedProgress);
     };
 
@@ -28,15 +32,16 @@ const Layout = () => {
       return t * (2 - t);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const backgroundColor = `rgb(
-    ${230 + ((158 - 230) * scrollProgress / 100)},
-    ${240 + ((163 - 240) * scrollProgress / 100)},
-    ${255 + ((245 - 255) * scrollProgress / 100)}
+    ${233 + ((255 - 255) * scrollProgress) / 100},
+    ${239 + ((255 - 255) * scrollProgress) / 100},
+    ${236 + ((255 - 255) * scrollProgress) / 100}
   )`;
+  <div className="min-h-screen bg-white transition-colors duration-300"></div>;
 
   const handleChatSend = () => {
     if (chatInput.trim()) {
@@ -56,7 +61,7 @@ const Layout = () => {
       className="min-h-screen transition-colors duration-300"
       style={{
         backgroundColor,
-        willChange: 'background-color',
+        willChange: "background-color",
       }}
     >
       {/* Overlay when cart is open */}
@@ -75,7 +80,7 @@ const Layout = () => {
       </main>
       <CartTab />
       <Footer />
-      
+
       {/* Chatbot Integration - Left Side */}
       {!isChatOpen ? (
         <div
