@@ -1,7 +1,12 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail";
-import { CartProvider } from './context/CartContext';
+import { CartProvider } from "./context/CartContext";
 import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
 
