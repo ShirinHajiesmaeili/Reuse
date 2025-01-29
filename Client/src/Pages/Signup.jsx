@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AuthPage = ({ onClose }) => {
+const Signup = ({ onClose }) => {
   const [authMode, setAuthMode] = useState('signin'); // 'signin', 'signup', 'forgot'
   const [formData, setFormData] = useState({
     email: '',
@@ -243,4 +243,4 @@ const AuthPage = ({ onClose }) => {
   );
 };
 
-export default AuthPage;
+export default Signup;
