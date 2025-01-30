@@ -31,6 +31,15 @@ const userSchema = new Schema({
     required: true,
     select: false,
   },
+  location: {
+    type: String,
+    required: true,
+  },
+  customerExperience: {
+    type: String,
+    required: true,
+    maxLength: 500,
+  }
 });
 
 const User = model('user', userSchema);
