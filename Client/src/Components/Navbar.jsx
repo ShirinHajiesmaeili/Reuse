@@ -21,11 +21,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-quaternary top-0 w-full z-50 flex flex-col items-center justify-between fontFamily:'Rethink Sans', serif mr-11">
+    // Change the style
+    <div className="mx-auto flex flex-col items-center justify-between fontFamily:'Rethink Sans', serif">
       <div className="flex items-center justify-between w-full">
         {/* Logo with Effects */}
         <div onClick={handleLogoClick} className="cursor-pointer">
-          <div className="logo-container relative overflow-hidden group right-64">
+          {/*Change the style here*/}
+          <div className="logo-container relative ">
             <img
               src={Logo2}
               alt="logo"
@@ -87,7 +89,7 @@ const Navbar = () => {
         </ul>
 
         {/* Icons */}
-        <div className="flex items-center space-x-5 ">
+        <div className="flex items-center space-x-5 p-6 ">
           {/* Language Icon */}
           <Link to="/">
             <svg
@@ -116,7 +118,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
       {/* Searchbar Component */}
       <Link to="/search">
         <Searchbar />

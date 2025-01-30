@@ -72,7 +72,7 @@ const Layout = () => {
         />
       )}
       <main
-        className={`w-full max-w-[1200px] mx-auto p-5 transform transition-transform duration-500
+        className={`w-full  mx-auto p-5 transform transition-transform duration-500
         ${statusTab ? "-translate-x-48" : ""}`}
       >
         <Navbar />
