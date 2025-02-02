@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <header className="flex flex-col items-center justify-between font-sans">
       {/* Navigation Items */}
-      <div className="flex items-center justify-between w-full px-6 py-3 bg-gradient-to-r from-[#fdffb6]  to-[#fdffb6] shadow-lg rounded-lg">
+      <div className="flex items-center justify-between w-full px-6 py-3 bg-gradient-to-r bg-[#F0FFF0] shadow-lg rounded-lg">
         {/* Logo */}
         <div onClick={handleLogoClick} className="cursor-pointer">
           <img src={Logo2} alt="logo" className="h-20 object-contain" />
