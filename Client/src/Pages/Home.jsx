@@ -1,7 +1,5 @@
-import Video from "../components/Video";
-
 const Home = () => {
-  return <Video />;
+  return;
 };
 
 export default Home;

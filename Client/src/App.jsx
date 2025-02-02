@@ -7,7 +7,7 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail";
 import { CartProvider } from "./context/CartContext";
-import Home from "./pages/Home";
+import Home from "./Pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
 

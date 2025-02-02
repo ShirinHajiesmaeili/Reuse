@@ -36,8 +36,8 @@ const Chatbot = () => {
   return (
     <div className="fixed bottom-5 right-5 w-80 border rounded-lg shadow-lg bg-white flex flex-col">
       {/* Header with close icon */}
-      <div className="flex justify-between items-center p-3 border-b border-gray-300 bg-gray-100 fontFamily:Rethink Sans, serif">
-        <h3 className="text-secondary font-bold fontFamily:Rethink Sans, serif">
+      <div className="flex justify-between items-center p-3 border-b border-gray-300 bg-gray-100 font-family:Rethink Sans, serif">
+        <h3 className="text-secondary font-bold font-family:Rethink Sans, serif">
           Reuse bot
         </h3>
         <button
@@ -56,7 +56,7 @@ const Chatbot = () => {
             className={`mb-3 max-w-xs p-2 rounded-lg text-sm ${
               msg.sender === "user"
                 ? "self-end text-right text-primary"
-                : " self-start text-left text-tertiary"
+                : "self-start text-left text-tertiary"
             }`}
           >
             {msg.text}
