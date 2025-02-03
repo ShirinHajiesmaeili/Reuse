@@ -19,6 +19,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/auth', authRouter);
+app.use("/cart", cartRouter);
 
 app.use(errorHandler);
 
