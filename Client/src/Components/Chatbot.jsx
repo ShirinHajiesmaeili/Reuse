@@ -25,7 +25,7 @@ const Chatbot = () => {
   if (!isOpen) {
     return (
       <div
-        className="fixed bottom-5 right-5 w-30 h-10 p-4 flex items-center justify-center text-white rounded-full cursor-pointer shadow-lg"
+        className="fixed bottom-5 left-5 w-30 h-10 p-4 flex items-center justify-center text-white rounded-full cursor-pointer shadow-lg bg-primary"
         onClick={() => setIsOpen(true)}
       >
         <span className="text-2xl text-white">Chat 💬</span>
@@ -34,9 +34,9 @@ const Chatbot = () => {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 w-80 border rounded-lg shadow-lg bg-white flex flex-col">
+    <div className="fixed bottom-5 left-5 w-80 border shadow-lg bg-white flex flex-col rounded-lg">
       {/* Header with close icon */}
-      <div className="flex justify-between items-center p-3 border-b border-gray-300 bg-gray-100 font-family:Rethink Sans, serif">
+      <div className="flex justify-between items-center p-3 border-b border-gray-300 bg-gray-100 font-family:Rethink Sans, serif rounded-lg">
         <h3 className="text-secondary font-bold font-family:Rethink Sans, serif">
           Reuse bot
         </h3>
@@ -55,8 +55,8 @@ const Chatbot = () => {
             key={index}
             className={`mb-3 max-w-xs p-2 rounded-lg text-sm ${
               msg.sender === "user"
-                ? "self-end text-right bg-primary text-white"
-                : "self-start text-left bg-tertiary text-white"
+                ? "self-end text-right text-primary"
+                : "self-start text-left text-secondary"
             }`}
           >
             {msg.text}
@@ -71,11 +71,11 @@ const Chatbot = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-tertiary"
+          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-primary"
         />
         <button
           onClick={handleSend}
-          className="ml-2 px-4 py-2 bg-secondary font-semibold rounded-lg hover:bg-secondary focus:ring-2 focus:ring-secondary"
+          className="ml-2 px-4 py-2 bg-secondary font-semibold rounded-lg hover:bg-secondary focus:ring-2 focus:ring-secondary text-white"
         >
           Send
         </button>
