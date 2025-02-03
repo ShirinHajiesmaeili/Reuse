@@ -4,6 +4,7 @@ import express from 'express';
 import './db/dbConnection.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import authRouter from './routers/authRouter.js';
+import cartRouter from './routers/cartRouter.js';
 
 const app = express();
 const port = 3000;
