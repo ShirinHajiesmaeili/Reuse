@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -55,8 +55,8 @@ const Chatbot = () => {
             key={index}
             className={`mb-3 max-w-xs p-2 rounded-lg text-sm ${
               msg.sender === "user"
-                ? "self-end text-right text-primary"
-                : "self-start text-left text-tertiary"
+                ? "self-end text-right bg-primary text-white"
+                : "self-start text-left bg-tertiary text-white"
             }`}
           >
             {msg.text}
