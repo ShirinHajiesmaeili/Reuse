@@ -1,25 +1,35 @@
+import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import express from 'express';
-import './db/dbConnection.js';
-import { errorHandler } from './middlewares/errorHandler.js';
-import authRouter from './routers/authRouter.js';
+import categoryRouter from './routers/categoryRouter.js';
+import "./db/dbConnection.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 
-//Middlewares
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  })
-);
-app.use(cookieParser());
+
+// Middleware
+app.use(cors({
+  origin: 'http://localhost:5173', // Frontend URL
+  credentials: true,
+ 
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.use('/auth', authRouter);
 
-app.use(errorHandler);
 
-app.listen(port, () => console.log(`The server is running on port:${port}`));
+// Routes
+app.use('/categories', categoryRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something broke!' });
+});
+
+app.listen(port, () => {
+  console.log(` Server running on http://localhost:${port}`);
+});
+
