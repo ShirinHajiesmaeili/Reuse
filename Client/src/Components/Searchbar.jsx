@@ -6,7 +6,7 @@ const Searchbar = () => {
       <form className="flex items-center space-x-6 bg-secondary rounded-full shadow-md px-6 py-2 w-full ">
         <input
           type="text"
-          className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-tertiary flex-1"
+          className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
           placeholder="What are you looking for?"
         />
 
