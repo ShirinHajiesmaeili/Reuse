@@ -27,8 +27,25 @@ const Signup = ({ onClose }) => {
     } else {
       console.log('Form submitted:', formData);
     }
-  };
 
+    // Post the data
+    fetch('http://localhost:3000/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userCredentials),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          return alert(data.error);
+        }
+        navigate('/signin');
+      })
+      .catch((err) => console.log(err));
+  };
+ 
   const renderForgotPassword = () => (
     <>
       <h2 className='text-center text-3xl font-extrabold text-gray-900 mb-8'>
