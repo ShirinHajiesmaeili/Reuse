@@ -1,51 +1,54 @@
+import axios from "axios";
+
 const CreatePost = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const title = formData.get("title");
-    const description = formData.get("description");
-    const date = formData.get("date");
-    const location = formData.get("location");
-    const quantity = formData.get("quantity");
-    const deliveryOption = formData.get("deliveryoption");
+    // Extract value from input field
+    const formdata = new FormData(event.target);
+    const title = formdata.get("title");
+    const description = formdata.get("description");
+    const zipcode = formdata.get("zipcode");
+    const city = formdata.get("city");
+    const price = formdata.get("price");
+    const quantity = formdata.get("quantity");
+    const deliveryOption = formdata.get("deliveryoption");
+    const image = formdata.get("image");
 
+    // Validation
     if (
       !title ||
       !description ||
-      !date ||
-      !location ||
+      !zipcode ||
+      !city ||
+      !price ||
       !quantity ||
-      !deliveryOption
+      !deliveryOption ||
+      !image
     ) {
       return alert("All fields are required.");
     }
 
-    const productDetails = {
+    const newPostData = {
       title,
       description,
-      date,
-      location,
+      zipcode,
+      city,
+      price,
       quantity,
       deliveryOption,
+      image,
     };
 
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(productDetails),
-    };
-
-    fetch("http://localhost:3000/api/events", fetchOptions)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        return alert("Product created successfully!");
-      })
-      .catch((err) => console.log(err));
+    //Posting the data
+    try {
+      const res = await axios.post("http://localhost:3000/posts", newPostData, {
+        withCredentials: true,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -57,7 +60,7 @@ const CreatePost = () => {
         <label className="form-control w-full ">
           <div className="label">
             <span className="label-text text-xl">
-              Event Name <span className="text-red-400">&#42;</span>
+              Title <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
@@ -80,25 +83,37 @@ const CreatePost = () => {
         <label className="form-control w-full ">
           <div className="label">
             <span className="label-text text-xl">
-              Date <span className="text-red-400">&#42;</span>
-            </span>
-          </div>
-          <input
-            type="date"
-            className="input input-bordered w-full "
-            name="date"
-          />
-        </label>
-        <label className="form-control w-full ">
-          <div className="label">
-            <span className="label-text text-xl">
-              Location <span className="text-red-400">&#42;</span>
+              Zipcode <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
             type="text"
             className="input input-bordered w-full "
-            name="location"
+            name="zipcode"
+          />
+        </label>
+        <label className="form-control w-full ">
+          <div className="label">
+            <span className="label-text text-xl">
+              City <span className="text-red-400">&#42;</span>
+            </span>
+          </div>
+          <input
+            type="text"
+            className="input input-bordered w-full "
+            name="city"
+          />
+        </label>
+        <label className="form-control w-full ">
+          <div className="label">
+            <span className="label-text text-xl">
+              Price <span className="text-red-400">&#42;</span>
+            </span>
+          </div>
+          <input
+            type="text"
+            className="input input-bordered w-full "
+            name="price"
           />
         </label>
         <label className="form-control w-full ">
@@ -122,7 +137,19 @@ const CreatePost = () => {
           <input
             type="text"
             className="input input-bordered w-full "
-            name="deliveryoption" // Corrected name
+            name="deliveryoption"
+          />
+        </label>
+        <label className="form-control w-full ">
+          <div className="label">
+            <span className="label-text text-xl">
+              Image <span className="text-red-400">&#42;</span>
+            </span>
+          </div>
+          <input
+            type="text"
+            className="input input-bordered w-full "
+            name="image"
           />
         </label>
         <button className="btn btn-primary w-full">Create New Item</button>
