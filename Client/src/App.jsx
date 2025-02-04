@@ -7,11 +7,11 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail";
 import { CartProvider } from "./context/CartContext";
-import Home from "./Pages/Home";
+import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
 import CreatePost from "./components/CreatePost";
-// import ProtectedLayout from "../layout/ProtectedLayout";
+import ProtectedLayout from "../layout/ProtectedLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
