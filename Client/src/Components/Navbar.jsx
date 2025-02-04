@@ -51,28 +51,32 @@ const Navbar = () => {
 
         <nav>
           <ul className="flex space-x-10 text-lg font-semibold text-tertiary">
-            {["Home", "Shop Items", "How Reuse Works", "Profile"].map(
-              (item, idx) => (
-                <Link
-                  to={
-                    item === "Home"
-                      ? "/"
-                      : `/${item.toLowerCase().replace(/\s+/g, "-")}`
-                  }
-                  key={idx}
+            {[
+              "Home",
+              "Shop Items",
+              "Sell Items",
+              "How Reuse Works",
+              "Profile",
+            ].map((item, idx) => (
+              <Link
+                to={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
+                key={idx}
+              >
+                <motion.li
+                  className="relative group text-xl hover:text-primary cursor-pointer transition duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <motion.li
-                    className="relative group text-xl hover:text-primary cursor-pointer transition duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {item}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-                  </motion.li>
-                </Link>
-              )
-            )}
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                </motion.li>
+              </Link>
+            ))}
           </ul>
         </nav>
 
