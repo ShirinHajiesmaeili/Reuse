@@ -1,17 +1,16 @@
 import React from "react";
 
 const Searchbar = () => {
+  return (
+    <div className="flex justify-center">
+      <form className="flex items-center space-x-6 bg-secondary rounded-full shadow-md px-6 py-2 w-full ">
+        <input
+          type="text"
+          className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
+          placeholder="What are you looking for?"
+        />
 
-  return ( 
-  <div className="">
-    <form className="flex space-x-1 bg-secondary rounded-full shadow-md px-1 py-1 fontFamily:Rethink Sans, serif">
-      <input
-        type="text"
-        className="px-4 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary"
-        placeholder="What are you looking for?"
-      />
-
-        <select className="px-4 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-tertiary">
+        <select className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-tertiary flex-1">
           <option>All Categories</option>
           <option>Electronics</option>
           <option>Fashion</option>
@@ -29,19 +28,19 @@ const Searchbar = () => {
 
         <input
           type="text"
-          className="w-32 px-4 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary"
+          className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
           placeholder="City"
         />
 
         <input
           type="text"
-          className="w-32 px-4 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary"
+          className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
           placeholder="Zip Code"
         />
 
         <button
           type="submit"
-          className="px-4 py-2 text-white font-semibold rounded-full hover:bg-primary transition duration-300"
+          className="px-6 py-2 text-white font-semibold rounded-full hover:bg-primary transition duration-300"
         >
           Search
         </button>
