@@ -51,28 +51,32 @@ const Navbar = () => {
 
         <nav>
           <ul className="flex space-x-10 text-lg font-semibold text-tertiary">
-            {["Home", "Shop Items", "How Reuse Works", "Profile"].map(
-              (item, idx) => (
-                <Link
-                  to={
-                    item === "Home"
-                      ? "/"
-                      : `/${item.toLowerCase().replace(/\s+/g, "-")}`
-                  }
-                  key={idx}
+            {[
+              "Home",
+              "Shop Items",
+              "Sell Items",
+              "How Reuse Works",
+              "Profile",
+            ].map((item, idx) => (
+              <Link
+                to={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
+                key={idx}
+              >
+                <motion.li
+                  className="relative group text-xl hover:text-primary cursor-pointer transition duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <motion.li
-                    className="relative group text-xl hover:text-primary cursor-pointer transition duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {item}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-                  </motion.li>
-                </Link>
-              )
-            )}
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                </motion.li>
+              </Link>
+            ))}
           </ul>
         </nav>
 
@@ -170,13 +174,13 @@ const Navbar = () => {
           </motion.div>
         </div>
 
-        {/* Shop Items Button */}
+        {/* Sell Items Button */}
         <div className="mt-8">
           <Link
             to="/shop-items"
             className="bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300"
           >
-            Shop Items
+            Sell Items
           </Link>
         </div>
       </section>
