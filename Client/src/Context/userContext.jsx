@@ -1,73 +1,39 @@
 import { createContext, useState, useEffect } from "react";
 
-const UserContext = createContext();
+// Create a UserContext
+export const UserContext = createContext();
 
-const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [zipcode, setZipcode] = useState(null);
-  const [city, setCity] = useState(null);
+// Provider component to wrap around the app
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null); // Store user info
 
+  // Simulate user authentication (replace with real logic)
   useEffect(() => {
-    if (!localStorage.getItem("token")) return;
-
-    const fetchOptions = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-
-    fetch("http://localhost:3001/api/auth/profile", fetchOptions)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          alert(data.error);
-          return;
-        }
-        setUser(data);
-        setZipcode(data.zipcode);
-        setCity(data.city);
-      })
-      .catch((err) => console.log(err));
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
-  const signIn = (userCredentials) => {
-    fetch("http://localhost:3001/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userCredentials),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          alert(data.error);
-          return;
-        }
-        localStorage.setItem("token", data.token);
-        setUser(data.user);
-        setZipcode(data.user.zipcode);
-        setCity(data.user.city);
-      })
-      .catch((err) => console.log(err));
+  // Function to log in the user and save to localStorage
+  // TODO: don't use localStorage something else like Cookie would be great
+  const logInUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
-  const signOut = () => {
-    localStorage.removeItem("token");
+  // Function to log out the user
+  // TODO: don't use localStorage something else like Cookie would be great
+  const logOutUser = () => {
     setUser(null);
-    setZipcode(null);
-    setCity(null);
+    localStorage.removeItem("user");
   };
 
-  const values = {
-    user,
-    signIn,
-    signOut,
-    zipcode,
-    city,
-  };
+  // Fake
 
-  return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, logInUser, logOutUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
-
-export { UserProvider, UserContext };
