@@ -13,6 +13,7 @@ const CreatePost = () => {
     const price = formdata.get("price");
     const quantity = formdata.get("quantity");
     const deliveryOption = formdata.get("deliveryoption");
+    const category = formdata.get("category");
     const image = formdata.get("image");
 
     // Validation
@@ -24,6 +25,7 @@ const CreatePost = () => {
       !price ||
       !quantity ||
       !deliveryOption ||
+      !category ||
       !image
     ) {
       return alert("All fields are required.");
@@ -138,6 +140,18 @@ const CreatePost = () => {
             type="text"
             className="input input-bordered w-full "
             name="deliveryoption"
+          />
+        </label>
+        <label className="form-control w-full ">
+          <div className="label">
+            <span className="label-text text-xl">
+              Category <span className="text-red-400">&#42;</span>
+            </span>
+          </div>
+          <input
+            type="text"
+            className="input input-bordered w-full "
+            name="category"
           />
         </label>
         <label className="form-control w-full ">
