@@ -174,13 +174,13 @@ const Navbar = () => {
           </motion.div>
         </div>
 
-        {/* Sell Items Button */}
+        {/* Shop Items Button */}
         <div className="mt-8">
           <Link
             to="/shop-items"
             className="bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300"
           >
-            Sell Items
+            Shop Items
           </Link>
         </div>
       </section>
