@@ -52,7 +52,7 @@ const Signup = ({ onClose }) => {
         Reset Password
       </h2>
       <p className='text-center text-gray-600 mb-8'>
-        Enter your email address and we'll send you instructions to reset your
+        Enter your email address and we&apos;ll send you instructions to reset your
         password.
       </p>
       <form className='space-y-6' onSubmit={handleSubmit}>
@@ -158,7 +158,7 @@ const Signup = ({ onClose }) => {
             className='text-sm text-teal-600 hover:text-teal-500'
             onClick={() => setAuthMode('signup')}
           >
-            Don't have an account? Sign Up
+            Don&apos;t have an account? Sign Up
           </button>
         </div>
       </form>
