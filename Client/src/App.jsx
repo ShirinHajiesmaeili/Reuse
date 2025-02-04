@@ -11,8 +11,7 @@ import Home from "./Pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
 import CreatePost from "./components/CreatePost";
-import { UserProvider } from "./context/authContext";
-import ProtectedLayout from "./layout/ProtectedLayout";
+// import ProtectedLayout from "../layout/ProtectedLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
