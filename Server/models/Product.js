@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
 const productSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Pls enter a product name'],
+    required: [true, "Pls enter a product name"],
     maxLength: 100,
   },
   description: {
@@ -20,7 +20,7 @@ const productSchema = new Schema({
   stockQuantity: {
     type: Number,
     required: true,
-    min: [0, 'Stock quantity cannot be negative'],
+    min: [0, "Stock quantity cannot be negative"],
   },
   isAvailable: {
     type: Boolean,
@@ -36,6 +36,6 @@ const productSchema = new Schema({
   },
 });
 
-const Product = model('product', productSchema);
+const Product = model("product", productSchema);
 
 export default Product;
