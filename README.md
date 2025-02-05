@@ -32,4 +32,10 @@
 ```bash
    npm init -y
    npm install
+   npm install express cors cookie-parser bcrypt mongoose
+   npm install dotenv nodeamon
+
+   npm install jsonwebtoken
 ```
+
+[JSON Web Tokens - an open, industry standard based on RFC 7519](https://jwt.io)
