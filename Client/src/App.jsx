@@ -10,6 +10,7 @@ import { CartProvider } from "./context/CartContext";
 import Home from "./Pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
+import Signin  from "./Pages/Signin";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path="shop-items" element={<ShopItems />} />
       <Route path="product/:id" element={<Detail />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="signin" element={<Signin />} />
     </Route>
   )
 );
