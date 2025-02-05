@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CreatePost = () => {
+const SellItems = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -13,6 +13,7 @@ const CreatePost = () => {
     const price = formdata.get("price");
     const quantity = formdata.get("quantity");
     const deliveryOption = formdata.get("deliveryoption");
+    const category = formdata.get("category");
     const image = formdata.get("image");
 
     // Validation
@@ -24,6 +25,7 @@ const CreatePost = () => {
       !price ||
       !quantity ||
       !deliveryOption ||
+      !category ||
       !image
     ) {
       return alert("All fields are required.");
@@ -37,10 +39,11 @@ const CreatePost = () => {
       price,
       quantity,
       deliveryOption,
+      category,
       image,
     };
 
-    //Posting the data
+    // Posting the data
     try {
       const res = await axios.post("http://localhost:3000/posts", newPostData, {
         withCredentials: true,
@@ -143,6 +146,35 @@ const CreatePost = () => {
         <label className="form-control w-full ">
           <div className="label">
             <span className="label-text text-xl">
+              Category <span className="text-red-400">&#42;</span>
+            </span>
+          </div>
+          <select
+            className="input input-bordered w-full"
+            name="category"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            <option value="all_categories">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="home_garden">Home & Garden</option>
+            <option value="motors">Motors</option>
+            <option value="collectibles_art">Collectibles & Art</option>
+            <option value="sports">Sports</option>
+            <option value="toys">Toys</option>
+            <option value="kitchen">Kitchen</option>
+            <option value="bathroom">Bathroom</option>
+            <option value="beauty">Beauty</option>
+            <option value="kids">Kids</option>
+            <option value="pets">Pets</option>
+          </select>
+        </label>
+        <label className="form-control w-full ">
+          <div className="label">
+            <span className="label-text text-xl">
               Image <span className="text-red-400">&#42;</span>
             </span>
           </div>
@@ -152,10 +184,10 @@ const CreatePost = () => {
             name="image"
           />
         </label>
-        <button className="btn btn-primary w-full">Create New Item</button>
+        <button className="btn btn-primary w-full">Sell New Item</button>
       </form>
     </main>
   );
 };
 
-export default CreatePost;
+export default SellItems;
