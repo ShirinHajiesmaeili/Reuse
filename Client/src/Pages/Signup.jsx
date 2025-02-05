@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 const SignUp = ({ onClose }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -10,14 +9,12 @@ const SignUp = ({ onClose }) => {
     city: "",
     zipCode: "",
   });
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
@@ -41,7 +38,6 @@ const SignUp = ({ onClose }) => {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-gray-500 bg-opacity-75">
       <div className="relative bg-white rounded-lg text-left shadow-xl w-full max-w-md mt-20">
@@ -60,7 +56,10 @@ const SignUp = ({ onClose }) => {
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Full Name
                 </label>
                 <input
@@ -74,7 +73,10 @@ const SignUp = ({ onClose }) => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email
                 </label>
                 <input
@@ -88,7 +90,10 @@ const SignUp = ({ onClose }) => {
                 />
               </div>
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   City
                 </label>
                 <input
@@ -102,7 +107,10 @@ const SignUp = ({ onClose }) => {
                 />
               </div>
               <div>
-                <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="zipCode"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Zip Code
                 </label>
                 <input
@@ -116,7 +124,10 @@ const SignUp = ({ onClose }) => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
@@ -130,7 +141,10 @@ const SignUp = ({ onClose }) => {
                 />
               </div>
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Confirm Password
                 </label>
                 <input
@@ -151,7 +165,10 @@ const SignUp = ({ onClose }) => {
               Create an Account
             </button>
             <div className="text-center">
-              <Link to="/signin" className="text-sm text-teal-600 hover:text-teal-500">
+              <Link
+                to="/signin"
+                className="text-sm text-teal-600 hover:text-teal-500"
+              >
                 Already have an account? Sign In
               </Link>
             </div>
@@ -161,5 +178,4 @@ const SignUp = ({ onClose }) => {
     </div>
   );
 };
-
 export default SignUp;
