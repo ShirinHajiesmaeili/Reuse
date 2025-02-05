@@ -2,7 +2,7 @@
 import express from "express";
 const router = express.Router();
 import cartController from "../controllers/cartController.js";
-// import authenticate from "../middleware/authenticate.js"; // Middleware to ensure the user is authenticated
+import authenticate from "../middlewares/authenticate.js"; // Middleware to ensure the user is authenticated
 
 // Get the current cart
 router.get("/", cartController.getCart);
