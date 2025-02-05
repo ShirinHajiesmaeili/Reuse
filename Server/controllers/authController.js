@@ -16,12 +16,24 @@ export const signUp = asyncHandler(async (req, res) => {
     age,
     isAdmin,
     password: hashedPassword,
+    location,
+    customerExperience,
   });
 
+  // TODO: Need additional security checks or user roles (e.g. admin checks)
   // TODO: Should we verify eMail existence
   // TODO: Login new User automatically or refere SignIp page
 
-  res.send(newUser);
+  //res.send(newUser);
+  res.status(201).json({
+    success: true,
+    data: {
+      id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+    },
+  });
 });
 
 /* Login as existing User */
@@ -29,29 +41,38 @@ export const signIn = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   //console.log(password);
 
+  const SECRET = process.env.JWT_SECRET || "b0cf624f19fbaec2a52d";
   /* Verify User Credentials */
   const user = await User.findOne({ email }).select("+password");
+
   if (!user)
-    throw new Error(
-      "The Username or Password is Incorrect. Try again. \n Error: #13455"
+    return next(
+      new ErrorResponse(
+        "The Username or Password is Incorrect. Try again. \n Error: #13455",
+        401
+      )
     );
 
   /* Is password correct? */
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch)
-    throw new Error(
-      "The Username or Password is Incorrect. Try again. \n Error: #13456"
+    return next(
+      new ErrorResponse(
+        "The Username or Password is Incorrect. Try again. \n Error: #13456",
+        401
+      )
     );
 
   /* Object containig the current connected user */
   const signedInUser = {
+    id: user._id,
     name: user.firstName,
     email: user.email,
   };
   //console.log(user.firstname);
 
   /* Create new Token for connected user */
-  const token = jwt.sign(signedInUser, process.env.JWT_SECRET, {
+  const token = jwt.sign(signedInUser, SECRET, {
     expiresIn: "7d",
   });
   //console.log token
@@ -65,7 +86,7 @@ export const signIn = asyncHandler(async (req, res) => {
   };
 
   /* Create cookie on user browser and prepare userContext on frontend */
-  res.cookie("token", token, cookieOptions).send(signedInUser);
+  res.cookie("token", token, cookieOptions).status(200).send(signedInUser);
 
   /* Send token to frontend if needed */
   res.send(token);
@@ -73,14 +94,43 @@ export const signIn = asyncHandler(async (req, res) => {
 
 /* Logout of application */
 export const signOut = (req, res) => {
-  // TODO: logic is missing
+  // remove Cookie with token
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === "prod" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "prod",
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "You have successfully signed out",
+  });
 };
 
-export const getUser = asyncHandler(async (req, res) => {
+/* Get User Information */
+export const getUser = asyncHandler(async (req, res, next) => {
   //console.log(req.userEmail);
 
-  const user = await User.findOne({ email: req.userEmail });
-  // TODO: logic is missing
+  const user = await User.findOne({ email: req.user.email }).select(
+    "-password"
+  );
+  if (!user) {
+    return next(new ErrorResponse("User not found", 404));
+  }
+  //console.log(user);
 
-  res.send.user;
+  //res.send(user);
+  res.status(200).json({
+    success: true,
+    data: {
+      id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      age: user.age,
+      isAdmin: user.isAdmin,
+      location: user.location,
+      customerExperience: user.customerExperience,
+    },
+  });
 });
