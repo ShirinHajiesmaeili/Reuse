@@ -7,6 +7,7 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/authContext";
 import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
@@ -19,8 +20,8 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="shop-items" element={<ShopItems />} />
       <Route path="product/:id" element={<Detail />} />
-      <Route path="createpost" element={<ProtectedLayout />}>
-        <Route index element={<CreatePost />} />
+      <Route path="sell-items" element={<ProtectedLayout />}>
+        <Route index element={<sellitems />} />
       </Route>
       <Route path="signup" element={<Signup />} />
     </Route>
@@ -29,9 +30,11 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </AuthProvider>
   );
 };
 
