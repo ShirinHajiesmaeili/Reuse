@@ -7,6 +7,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 import authRouter from "./routers/authRouter.js";
 import cartRouter from "./routers/cartRouter.js";
 import zipcodesRouter from "./routers/zipcodesRouter.js";
+import ErrorResponse from "./utils/ErrorResponse.js";
 
 connectDB();
 
