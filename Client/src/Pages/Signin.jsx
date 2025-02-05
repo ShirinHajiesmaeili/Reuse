@@ -82,7 +82,8 @@ const SignIn = ({ onClose }) => {
   );
 
   return (
-    <div className='inset-0 z-50 overflow-y-auto h-screen'>
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-gray-500 bg-opacity-75">
+        
       <div className='flex min-h-screen items-center justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0'>
         <div
           className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'
