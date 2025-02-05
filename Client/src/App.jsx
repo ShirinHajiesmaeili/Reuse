@@ -7,7 +7,6 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail";
 import { CartProvider } from "./context/CartContext";
-import { AuthProvider } from "./context/authContext";
 import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
@@ -30,11 +29,9 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <RouterProvider router={router} />
-      </CartProvider>
-    </AuthProvider>
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   );
 };
 
