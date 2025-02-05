@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Searchbar = () => {
+  const [zipCodes, setZipCodes] = useState([]);
+  const [zipCodeInput, setZipCodeInput] = useState("");
+
+  const changeHandler = async (event) => {
+    const value = event.target.value;
+    setZipCodeInput(value);
+
+    if (value.length < 2) {
+      setZipCodes([]);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/zipcodes?zipCode=${value}`
+      );
+      const data = await response.json();
+      setZipCodes(data);
+    } catch (error) {
+      console.error("Error fetching zip codes:", error);
+    }
+  };
+
   return (
     <div className="flex justify-center">
       <form className="flex items-center space-x-6 bg-secondary rounded-full shadow-md px-6 py-2 w-full ">
@@ -36,7 +59,19 @@ const Searchbar = () => {
           type="text"
           className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
           placeholder="Zip Code"
+          value={zipCodeInput}
+          onChange={changeHandler}
         />
+
+        {zipCodes.length > 0 && (
+          <select className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1">
+            {zipCodes.map((item, index) => (
+              <option key={index} value={item.zipCode}>
+                {item.zipCode} - {item.city}, {item.state}
+              </option>
+            ))}
+          </select>
+        )}
 
         <button
           type="submit"
