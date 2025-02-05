@@ -11,7 +11,7 @@ import { AuthProvider } from "./context/authContext";
 import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
-import CreatePost from "./components/CreatePost";
+import SellItems from "./pages/SellItems";
 import ProtectedLayout from "./layout/ProtectedLayout";
 
 const router = createBrowserRouter(
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="shop-items" element={<ShopItems />} />
       <Route path="product/:id" element={<Detail />} />
       <Route path="sell-items" element={<ProtectedLayout />}>
-        <Route index element={<sellitems />} />
+        <Route index element={<SellItems />} />
       </Route>
       <Route path="signup" element={<Signup />} />
     </Route>
