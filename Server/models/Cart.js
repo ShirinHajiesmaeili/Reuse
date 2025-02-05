@@ -1,44 +1,29 @@
-// Mongoose Model for Cart
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-// Schema for items in the cart, each referencing a product and its quantity
-const cartItemSchema = new mongoose.Schema({
-    productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product', // References the Product model
-        required: true
-    },
-    quantity: {
-        type: Number, // Number of items to add to the cart
+const { Schema, model } = mongoose;
+
+const cartSchema = new Schema({
+  products: [
+    {
+      productID: {
+        type: Schema.Types.ObjectId,
+        ref: "products",
         required: true,
-        min: 1 // Ensure quantity is at least 1
-    }
-});
-
-// Main Cart schema, associated with a user and containing an array of items
-const cartSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // References the User model
-        required: true
+      },
+      quantity: {
+        type: Number,
+        required: true,
+        min: 1,
+      },
     },
-    items: [cartItemSchema], // Array of cart items
-    createdAt: {
-        type: Date,
-        default: Date.now // Automatically set when the cart is created
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now // Automatically updated before saving
-    }
+  ],
+  userID: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
 });
 
-// Middleware to update the 'updatedAt' field before saving
-cartSchema.pre('save', function(next) {
-    this.updatedAt = Date.now();
-    next();
-});
+const Cart = model("cart", cartSchema);
 
-// Create a Mongoose model for the Cart
-const Cart = mongoose.model('Cart', cartSchema);
 export default Cart;
