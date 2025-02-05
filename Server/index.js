@@ -1,25 +1,39 @@
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import express from 'express';
-import './db/dbConnection.js';
-import { errorHandler } from './middlewares/errorHandler.js';
-import authRouter from './routers/authRouter.js';
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import categoryRouter from "./routers/categoryRouter.js";
+import "./db/dbConnection.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
+import authRouter from "./routers/authRouter.js";
+import cartRouter from "./routers/cartRouter.js";
+import zipcodesRouter from "./routers/zipcodesRouter.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-//Middlewares
+// Middleware
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: "http://localhost:5173", // Frontend URL
     credentials: true,
   })
 );
-app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.use('/auth', authRouter);
+// Routes
+app.use("/categories", categoryRouter);
+app.use("/auth", authRouter);
+app.use("/cart", cartRouter);
+app.use("/zipcodes", zipcodesRouter);
 
-app.use(errorHandler);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Something broke!" });
+});
 
-app.listen(port, () => console.log(`The server is running on port:${port}`));
+app.listen(port, () => {
+  console.log(` Server running on http://localhost:${port}`);
+});

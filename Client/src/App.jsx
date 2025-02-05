@@ -10,6 +10,8 @@ import { CartProvider } from "./context/CartContext";
 import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
 import Signup from "./Pages/Signup";
+import CreatePost from "./components/CreatePost";
+import ProtectedLayout from "./layout/ProtectedLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +19,9 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="shop-items" element={<ShopItems />} />
       <Route path="product/:id" element={<Detail />} />
+      <Route path="createpost" element={<ProtectedLayout />}>
+        <Route index element={<CreatePost />} />
+      </Route>
       <Route path="signup" element={<Signup />} />
     </Route>
   )
