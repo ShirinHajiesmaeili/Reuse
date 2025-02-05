@@ -176,10 +176,10 @@ const Navbar = () => {
         {/* Centered Buttons */}
         <div className="flex justify-center items-center gap-4 mt-8">
           <Link
-            to="/createPost"
+            to="/shop-items"
             className="bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300"
           >
-            Sell Items
+            Shop Items
           </Link>
 
           <Link
