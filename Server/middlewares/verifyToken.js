@@ -5,21 +5,31 @@ import User from "../models/User.js";
 
 const verifyToken = asyncHandler(async (req, res, next) => {
   const SECRET = process.env.JWT_SECRET || "b0cf624f19fbaec2a52d";
+  console.log("Authorization Header:", req.headers.authorization);
+  console.log("Cookies:", req.cookies);
+
+  let token;
+
+  /* Get token */
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+    console.log("Token aus Header gefunden:", token);
+  } else if (req.cookies && req.cookies.token) {
+    token = req.cookies.token;
+    console.log("Token aus Cookie gefunden:", token);
+  }
+
+  if (!token) {
+    return next(new ErrorResponse("No token found, authorization denied", 401));
+  }
+  //console.log(token);
 
   try {
-    /* Get token from user browser */
-    const { token } = req.cookies;
-
-    if (!token) {
-      return next(
-        new ErrorResponse("No token found, authorization denied", 401)
-      );
-    }
-    //console.log(token);
-
     /* Verify token */
     const payload = jwt.verify(token, SECRET);
-
     if (!payload) {
       return next(
         new Error(

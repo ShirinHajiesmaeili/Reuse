@@ -13,6 +13,20 @@ const options = {
         url: `http://localhost:${process.env.REMPORT || 3000}`,
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   // Pfade zu den JS-Dateien, in denen die Swagger-Kommentare stehen
   apis: [

@@ -36,6 +36,7 @@ app.use("/zipcodes", zipcodesRouter);
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {
+  console.error(err);
   next(new ErrorResponse(`Route ${req.originalUrl} not found`, 404));
 });
 

@@ -5,6 +5,50 @@ const router = express.Router();
 
 /**
  * @swagger
+ * /auth/signout:
+ *   delete:
+ *     summary: Logout the current user (requires token)
+ *     security:
+ *       - bearerAuth: []  # Token erforderlich
+ *     responses:
+ *       200:
+ *         description: User logged out successfully
+ *       401:
+ *         description: Unauthorized - user not authenticated
+ *       500:
+ *         description: Server error
+ */
+router.delete("/signout", async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Kein Token vorhanden, Zugriff verweigert" });
+    }
+
+    // Anfrage an den externen Server weiterleiten
+    const response = await axios.delete("http://localhost:3000/auth/signout", {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    res.status(response.status).json(response.data);
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res
+        .status(500)
+        .json({ error: "Serverfehler oder Verbindung fehlgeschlagen" });
+    }
+  }
+});
+
+/**
+ * @swagger
  * /auth/me:
  *   get:
  *     summary: Get the currently logged-in user's details (external request)
@@ -18,16 +62,25 @@ const router = express.Router();
  *               properties:
  *                 firstName:
  *                   type: string
+ *                   example: "Robin"
  *                 lastName:
  *                   type: string
+ *                   example: "G."
  *                 email:
  *                   type: string
+ *                   example: "robin.goerlach@sasd.de"
  *                 age:
  *                   type: integer
+ *                   example: 30
  *                 isAdmin:
  *                   type: boolean
+ *                   example: false
  *                 location:
  *                   type: string
+ *                   example: "Berlin"
+ *                 customerExperience:
+ *                   type: string
+ *                   example: "Erfahrungen mit Projektmanagement und Teamführung."
  *       401:
  *         description: Unauthorized - user not authenticated
  *       500:
@@ -42,6 +95,7 @@ router.get("/me", async (req, res) => {
       },
     });
 
+    // Leite die Antwort weiter, inklusive customerExperience
     res.status(response.status).json(response.data);
   } catch (error) {
     if (error.response) {
@@ -77,7 +131,7 @@ router.get("/me", async (req, res) => {
  *                 example: "john.doe@gmail.com"
  *               password:
  *                 type: string
- *                 example: "pw12345"
+ *                 example: "pwd123456"
  *               age:
  *                 type: integer
  *                 example: 30
@@ -130,8 +184,10 @@ router.post("/signup", async (req, res) => {
  *             properties:
  *               email:
  *                 type: string
+ *                 example: "john.doe@gmail.com"
  *               password:
  *                 type: string
+ *                 example: "pwd123456"
  *     responses:
  *       200:
  *         description: Login successful, returns token
@@ -145,7 +201,7 @@ router.post("/signin", async (req, res) => {
       req.body
     );
 
-    // Antwort von localhost:3000 an den Client weiterleiten
+    // provide localhost:3000 answer to client
     res.status(response.status).json(response.data);
   } catch (error) {
     if (error.response) {
