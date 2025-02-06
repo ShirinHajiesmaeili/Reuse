@@ -3,19 +3,21 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-} from 'react-router-dom';
-import MainLayout from './layout/MainLayout';
-import Detail from './pages/Detail';
-import { CartProvider } from './context/CartContext';
-import { AuthProvider } from './context/authContext';
-import Home from './pages/Home';
-import ShopItems from './pages/ShopItems';
-import Auth from './Pages/Auth';
-//import CreatePost from './Components/CreatePost';
-import ProtectedLayout from './layout/ProtectedLayout';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import ForgotPassword from './components/ForgotPassword';
+} from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import Detail from "./pages/Detail";
+import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/authContext";
+import Home from "./pages/Home";
+import ShopItems from "./pages/ShopItems";
+import Auth from "./pages/Auth";
+import SellItems from "./pages/SellItems";
+import ProtectedLayout from "./layout/ProtectedLayout";
+import SignIn from "./components/SignIn.jsx";
+import SignUp from "./components/SignUp";
+import ForgotPassword from "./components/ForgotPassword";
+
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
