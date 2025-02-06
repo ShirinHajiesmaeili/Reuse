@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
 
 const authenticate = (req, res, next) => {
-  // Token aus den Headern extrahieren
+  const SECRET = process.env.JWT_SECRET || "b0cf624f19fbaec2a52d";
+
+  /* Extract tokens from headers */
   const token = req.headers["authorization"];
 
   if (!token) {
@@ -9,16 +11,16 @@ const authenticate = (req, res, next) => {
   }
 
   try {
-    // Bearer entfernen, falls vorhanden
+    /* Remove bearer if present */
     const actualToken = token.startsWith("Bearer ") ? token.slice(7) : token;
 
-    // Token verifizieren
+    /* verify token */
     const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
 
-    // Nutzerinformationen für die weiteren Schritte speichern
+    /* Save user information for further steps  */
     req.user = decoded;
 
-    // Weiter zur nächsten Middleware oder Route
+    /* Continue to the next middleware or route */
     next();
   } catch (error) {
     return res.status(401).json({ message: "Invalid or expired token" });
