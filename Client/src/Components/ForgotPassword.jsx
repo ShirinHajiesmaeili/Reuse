@@ -1,6 +1,4 @@
-
 import { Link } from "react-router";
-
 
 const ForgotPassword = () => {
   const handleSubmit = () => {};
@@ -19,12 +17,10 @@ const ForgotPassword = () => {
           <label
             htmlFor="email"
             className="block text-sm font-medium text-gray-700"
-
           >
             Email address
           </label>
           <input
-
             id="email"
             name="email"
             type="email"
@@ -43,7 +39,6 @@ const ForgotPassword = () => {
             <button
               type="button"
               className="text-sm text-teal-600 hover:text-teal-500"
-
             >
               Back to Sign In
             </button>
@@ -54,6 +49,4 @@ const ForgotPassword = () => {
   );
 };
 
-
 export default ForgotPassword;
-
