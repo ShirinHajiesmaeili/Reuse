@@ -5,6 +5,7 @@ import { CartContext } from "../context/CartContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Chatbot from "../components/Chatbot";
+import CookieConsent from "../components/CookieConsent";
 
 const Layout = () => {
   const { statusTab, setStatusTab } = useContext(CartContext);
@@ -76,6 +77,7 @@ const Layout = () => {
       <CartTab />
       <Footer />
       <Chatbot />
+      <CookieConsent />
     </div>
   );
 };
