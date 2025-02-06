@@ -18,6 +18,8 @@ import SignUp from "./components/SignUp";
 import Profile from "./pages/Profile.jsx";
 import ForgotPassword from "./components/ForgotPassword";
 
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
