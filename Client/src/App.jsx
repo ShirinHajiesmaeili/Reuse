@@ -7,11 +7,18 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail";
 import { CartProvider } from "./context/CartContext";
-import Home from "./Pages/Home";
+import { AuthProvider } from "./context/authContext";
+import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
-import Signup from "./Pages/Signup";
-import CreatePost from "./components/CreatePost";
-// import ProtectedLayout from "../layout/ProtectedLayout";
+import Auth from "./pages/Auth";
+import SellItems from "./pages/SellItems";
+import ProtectedLayout from "./layout/ProtectedLayout";
+import SignIn from "./components/SignIn.jsx";
+import SignUp from "./components/SignUp";
+import Profile from "./pages/Profile.jsx";
+import ForgotPassword from "./components/ForgotPassword";
+
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,19 +26,28 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="shop-items" element={<ShopItems />} />
       <Route path="product/:id" element={<Detail />} />
-      <Route path="create" element={<ProtectedLayout />}>
-        <Route index element={<CreatePost />} />
+      <Route path="sell-items" element={<ProtectedLayout />}>
+        <Route index element={<SellItems />} />
       </Route>
-      <Route path="signup" element={<Signup />} />
+      <Route path="profile" element={<ProtectedLayout />}>
+        <Route index element={<Profile />} />
+      </Route>
+      <Route path="auth" element={<Auth />}>
+        <Route index element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
+      </Route>
     </Route>
   )
 );
 
 const App = () => {
   return (
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </AuthProvider>
   );
 };
 
