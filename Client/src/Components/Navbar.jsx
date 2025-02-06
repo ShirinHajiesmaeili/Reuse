@@ -93,7 +93,7 @@ const Navbar = () => {
           </Link>
 
           {/* Signup Icon */}
-          <Link to="/signup" aria-label="Sign Up">
+          <Link to="/auth" aria-label="Sign Up">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="fill-primary h-6 w-auto cursor-pointer hover:scale-125 transition-transform duration-300"
@@ -183,7 +183,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            to="/sell-items"
+            to="/auth"
             className="bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300"
           >
             Sell Items

@@ -10,25 +10,29 @@ import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/authContext";
 import Home from "./pages/Home";
 import ShopItems from "./pages/ShopItems";
-import Signup from "./Pages/Signup";
-
-import Signin  from "./Pages/Signin";
-
+import Auth from "./pages/Auth";
 import SellItems from "./pages/SellItems";
 import ProtectedLayout from "./layout/ProtectedLayout";
+import SignIn from "./components/SignIn.jsx";
+import SignUp from "./components/SignUp";
+import ForgotPassword from "./components/ForgotPassword";
+
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<MainLayout />}>
+    <Route path='/' element={<MainLayout />}>
       <Route index element={<Home />} />
-      <Route path="shop-items" element={<ShopItems />} />
-      <Route path="product/:id" element={<Detail />} />
-      <Route path="sell-items" element={<ProtectedLayout />}>
-        <Route index element={<SellItems />} />
+      <Route path='shop-items' element={<ShopItems />} />
+      <Route path='product/:id' element={<Detail />} />
+      <Route path='createpost' element={<ProtectedLayout />}>
+       {/* <Route index element={<CreatePost />} />*/}
       </Route>
-      <Route path="signup" element={<Signup />} />
-      <Route path="signin" element={<Signin />} />
+      <Route path='auth' element={<Auth />}>
+        <Route index element={<SignIn />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route path='forgotpassword' element={<ForgotPassword />} />
+      </Route>
     </Route>
   )
 );
