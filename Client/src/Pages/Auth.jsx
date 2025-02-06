@@ -1,3 +1,4 @@
+
 import { Link, Outlet } from "react-router-dom";
 
 const Signup = () => {
@@ -9,6 +10,7 @@ const Signup = () => {
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <Link to="/">
               <button className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+
                 ✕
               </button>
             </Link>
@@ -19,5 +21,6 @@ const Signup = () => {
     </div>
   );
 };
+
 
 export default Signup;
