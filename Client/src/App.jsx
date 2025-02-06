@@ -15,8 +15,10 @@ import SellItems from "./pages/SellItems";
 import ProtectedLayout from "./layout/ProtectedLayout";
 import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp";
-import ForgotPassword from "./components/ForgotPassword";
 import Profile from "./pages/Profile.jsx";
+import ForgotPassword from "./components/ForgotPassword";
+
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,10 +29,12 @@ const router = createBrowserRouter(
       <Route path="sell-items" element={<ProtectedLayout />}>
         <Route index element={<SellItems />} />
       </Route>
+      <Route path="profile" element={<ProtectedLayout />}>
+        <Route index element={<Profile />} />
+      </Route>
       <Route path="auth" element={<Auth />}>
         <Route index element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="profile" element={<Profile />} />
         <Route path="forgotpassword" element={<ForgotPassword />} />
       </Route>
     </Route>
