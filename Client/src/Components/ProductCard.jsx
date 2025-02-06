@@ -54,8 +54,7 @@ const ProductCard = ({ data }) => {
           <div className="relative overflow-hidden rounded-md">
             <button
               onClick={handleAddToCart}
-              className="relative bg-[#45b6e6] text-white p-2 rounded-md text-sm hover:bg-[#184e77] flex gap-2 items-center transition-all group-hover:shadow-lg border border-[#3da5d5] z-10 scale-105 hover:scale-[1.02] duration-300 hover:border-[#184e77]"
-              style={{ boxShadow: "0 4px 12px rgba(69, 182, 230, 0.3)" }}
+              className="relative bg-secondary text-white p-2 rounded-md text-sm hover:bg-secondary/80 flex items-center justify-center gap-2 transition-all group-hover:shadow-lg border border-secondary z-10 scale-105 hover:scale-[1.02] duration-300"
             >
               <img
                 src={iconCart}
