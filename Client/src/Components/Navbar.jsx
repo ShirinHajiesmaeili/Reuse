@@ -183,7 +183,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            to="/sell-items"
+            to="/auth"
             className="bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300"
           >
             Sell Items
