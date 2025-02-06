@@ -5,7 +5,7 @@ import { AuthContext } from "../context/authContext";
 const ProtectedLayout = () => {
   const { user } = useContext(AuthContext);
 
-  return user ? <Outlet /> : <Navigate to="/signup" />;
+  return user ? <Outlet /> : <Navigate to="/auth" />;
 };
 
 export default ProtectedLayout;
