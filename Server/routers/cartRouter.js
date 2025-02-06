@@ -16,4 +16,7 @@ router.post("/remove", cartController.removeFromCart);
 // Clear the cart
 router.post("/clear", cartController.clearCart);
 
+// Update cart
+// TODO: router.put("/edit", cartController.editCart);
+
 export default router;
