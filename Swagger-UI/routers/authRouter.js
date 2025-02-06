@@ -5,6 +5,57 @@ const router = express.Router();
 
 /**
  * @swagger
+ * /auth/me:
+ *   get:
+ *     summary: Get the currently logged-in user's details (external request)
+ *     responses:
+ *       200:
+ *         description: User details retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 firstName:
+ *                   type: string
+ *                 lastName:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 age:
+ *                   type: integer
+ *                 isAdmin:
+ *                   type: boolean
+ *                 location:
+ *                   type: string
+ *       401:
+ *         description: Unauthorized - user not authenticated
+ *       500:
+ *         description: Server error
+ */
+router.get("/me", async (req, res) => {
+  try {
+    // Sende die Anfrage an den externen Server
+    const response = await axios.get("http://localhost:3000/auth/me", {
+      headers: {
+        Authorization: req.headers.authorization || "",
+      },
+    });
+
+    res.status(response.status).json(response.data);
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res
+        .status(500)
+        .json({ error: "Serverfehler oder Verbindung fehlgeschlagen" });
+    }
+  }
+});
+
+/**
+ * @swagger
  * /auth/signup:
  *   post:
  *     summary: Create a new user account (external request)

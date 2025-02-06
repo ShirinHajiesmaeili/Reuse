@@ -16,7 +16,7 @@ export const signUp = asyncHandler(async (req, res) => {
     email,
     age,
     isAdmin,
-    password: hashedPassword,
+    password, //: hashedPassword, TODO: remove //
     location,
     customerExperience,
   });
@@ -55,7 +55,8 @@ export const signIn = asyncHandler(async (req, res) => {
     );
 
   /* Is password correct? */
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.password); // TODO: remove line
+  // const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch)
     return next(
       new ErrorResponse(
