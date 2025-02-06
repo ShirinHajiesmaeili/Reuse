@@ -1,25 +1,29 @@
 import swaggerJSDoc from "swagger-jsdoc";
 
-const swaggerDefinition = {
-  openapi: "3.0.0",
-  info: {
-    title: "Standalone Swagger UI for API Documentation",
-    version: "1.0.0",
-    description: "Standalone Swagger UI for your backend application",
-  },
-  servers: [
-    {
-      url: "http://localhost:5173", // Die URL deines API-Servers
-      description: "Development Server",
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Express API with Swagger",
+      version: "1.0.0",
+      description: "API-Dokumentation für deine Express-App",
     },
+    servers: [
+      {
+        url: `http://localhost:${process.env.REMPORT || 3000}`,
+      },
+    ],
+  },
+  // Pfade zu den JS-Dateien, in denen die Swagger-Kommentare stehen
+  apis: [
+    "./routers/index.js",
+    "./routers/authRouter.js",
+    "./routers/cartRouter.js",
+    "./routers/categoryRouter.js",
+    "./routers/productRouter.js",
+    "./routers/zipcodesRouter.js",
   ],
 };
 
-const options = {
-  swaggerDefinition,
-  apis: ["./routers/*.js"], // Hier wird sichergestellt, dass alle Router berücksichtigt werden
-};
-
 const swaggerSpec = swaggerJSDoc(options);
-
 export default swaggerSpec;

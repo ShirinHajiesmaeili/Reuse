@@ -13,5 +13,6 @@ authRouter.get("/me", verifyToken, getUser);
 authRouter.post("/signup", signUp);
 authRouter.post("/signin", signIn);
 authRouter.delete("/signout", signOut);
+// TODO: authRouter.put("/update", update);
 
 export default authRouter;
