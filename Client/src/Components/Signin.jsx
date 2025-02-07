@@ -2,16 +2,16 @@ import { Link } from "react-router";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { signIn } from "../data/authentication";
-import ErrorPopup from "../components/ErrorPopup"; // Importando o novo componente
+import ErrorPopup from "../components/ErrorPopup"; // Importing the new component
 
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(""); // Estado para armazenar o erro
+  const [error, setError] = useState(""); // State to store the error message
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
-    setError(""); // Resetar erro ao tentar novamente
+    setError(""); // Reset error when trying again
 
     event.preventDefault();
 
@@ -27,7 +27,7 @@ const SignIn = () => {
       setUser(userDetails);
     } catch (error) {
       console.error(error);
-      setError("Invalid email or password"); // Definir a mensagem de erro
+      setError("Invalid email or password"); // Setting the error message
     } finally {
       setIsLoading(false);
     }
@@ -37,7 +37,7 @@ const SignIn = () => {
     <>
       <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign In</h2>
 
-      {/* Componente de erro */}
+      {/* Error Component */}
       <ErrorPopup message={error} onClose={() => setError("")} />
 
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
