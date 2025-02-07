@@ -1,10 +1,10 @@
 import Zipcode from "../models/Zipcode.js";
 
 const getZipCodes = async (req, res) => {
-  const { zipcode } = req.query;
+  const { zipCode } = req.query;
   try {
     const results = await Zipcode.find({
-      postalCode: { $regex: `^${zipcode}`, $options: "i" },
+      postalCode: { $regex: `^${zipCode}`, $options: "i" },
     });
     res.json(results);
   } catch (error) {
