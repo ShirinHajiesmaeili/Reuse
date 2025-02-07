@@ -2,13 +2,16 @@ import { Link } from "react-router";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { signIn } from "../data/authentication";
+import ErrorPopup from "../components/ErrorPopup"; // Importando o novo componente
 
 const SignIn = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(""); // Estado para armazenar o erro
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
+    setError(""); // Resetar erro ao tentar novamente
 
     event.preventDefault();
 
@@ -24,7 +27,7 @@ const SignIn = () => {
       setUser(userDetails);
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      setError("Invalid email or password"); // Definir a mensagem de erro
     } finally {
       setIsLoading(false);
     }
@@ -32,16 +35,15 @@ const SignIn = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-extrabold text-gray-900">
-        Sign In
-      </h2>
+      <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign In</h2>
+
+      {/* Componente de erro */}
+      <ErrorPopup message={error} onClose={() => setError("")} />
+
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
@@ -53,10 +55,7 @@ const SignIn = () => {
             />
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
             </label>
             <input
@@ -71,10 +70,7 @@ const SignIn = () => {
 
         <div className="flex items-center justify-between">
           <Link to="/auth/forgotpassword">
-            <button
-              type="button"
-              className="text-sm text-teal-600 hover:text-teal-500"
-            >
+            <button type="button" className="text-sm text-teal-600 hover:text-teal-500">
               Forgot password?
             </button>
           </Link>
@@ -85,15 +81,12 @@ const SignIn = () => {
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         >
-          Sign In
+          {isLoading ? "Signing in..." : "Sign In"}
         </button>
 
         <div className="text-center">
           <Link to="/auth/signup">
-            <button
-              type="button"
-              className="text-sm text-teal-600 hover:text-teal-500"
-            >
+            <button type="button" className="text-sm text-teal-600 hover:text-teal-500">
               Don&apos;t have an account? Sign Up
             </button>
           </Link>
