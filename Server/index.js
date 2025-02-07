@@ -15,7 +15,7 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
-const env = process.env.NODE_ENV || "prod";
+const env = process.env.NODE_ENV || "production";
 
 /* Middleware */
 app.use(
