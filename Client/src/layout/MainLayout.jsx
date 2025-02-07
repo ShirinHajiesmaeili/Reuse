@@ -67,7 +67,7 @@ const Layout = () => {
         />
       )}
       <main
-        className={`w-full mx-auto p-5 transform transition-transform duration-500 ${
+        className={`w-full mx-auto transform transition-transform duration-500 ${
           statusTab ? "-translate-x-48" : ""
         }`}
       >

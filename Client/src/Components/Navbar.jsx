@@ -9,16 +9,19 @@ import { CartContext } from "../context/CartContext";
 const Navbar = () => {
   const { setStatusTab } = useContext(CartContext);
   const navigate = useNavigate();
+
   const handleLogoClick = (e) => {
     e.preventDefault();
     navigate("/");
   };
+
   const handleCartClick = (e) => {
     e.preventDefault();
     setStatusTab(true);
   };
+
   return (
-    <header className="flex flex-col items-center justify-between font-sans">
+    <header className="flex flex-col items-center justify-between font-sans px-6">
       {/* Navigation Items */}
       <div className="flex items-center justify-between w-full px-6 py-3 bg-gradient-to-r bg-[#F0FFF0] shadow-lg rounded-lg">
         {/* Logo */}
@@ -84,10 +87,11 @@ const Navbar = () => {
         </div>
       </div>
       {/* Searchbar */}
-      <div className="py-4 w-full">
+      <div className="pt-3 w-full">
         <Searchbar />
       </div>
     </header>
   );
 };
+
 export default Navbar;
