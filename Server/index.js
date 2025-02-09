@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -8,6 +9,7 @@ import authRouter from "./routers/authRouter.js";
 import cartRouter from "./routers/cartRouter.js";
 import zipcodesRouter from "./routers/zipcodesRouter.js";
 import ErrorResponse from "./utils/ErrorResponse.js";
+import uploadRouter from "./routers/uploadRouter.js";
 
 connectDB();
 
@@ -33,6 +35,7 @@ app.use("/categories", categoryRouter);
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/zipcodes", zipcodesRouter);
+app.use("/api/upload", uploadRouter);
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {

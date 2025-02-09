@@ -2,6 +2,8 @@ import Product from "../models/Product.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 
+
+
 export const getAllProducts = asyncHandler(async (req, res, next) => {
   const products = await Product.find();
 
