@@ -33,16 +33,16 @@ app.use("/categories", categoryRouter);
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/zipcodes", zipcodesRouter);
-app.use("/*", {
-  // TODO: default error URL
+app.use("/*", (req, res) => {
+  res.statusCode(404).json({ error: "Route not found" });
 });
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {
   console.error(err);
 
-  let statusCode = err.statusCode || 500;
-  let message = err.message || "Internal Server Error";
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
 
   if (env !== "prod") {
     res.status(statusCode).json({
