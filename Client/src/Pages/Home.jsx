@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <>
       {/* Image Carousel*/}
-      <div className="relative w-screen h-[800px] pt-3">
+      <div className="relative w-screen h-[800px]">
         <img
           src={images[currentImageIndex]}
           alt="Carousel"
