@@ -108,7 +108,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <div className="relative w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
-              <span>{user.name?.[0] || "U"}</span>{" "}
+              <span>{user.firstName?.[0] || "U"}</span>{" "}
             </div>
           )}
           {/* Cart Component */}
