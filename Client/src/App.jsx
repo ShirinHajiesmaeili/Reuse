@@ -5,18 +5,19 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
-import Detail from "./pages/Detail";
+import Detail from "./pages/Detail.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
-import { AuthProvider } from "./context/AuthContext.jsx";
-import Home from "./pages/Home";
-import ShopItems from "./pages/ShopItems";
-import Auth from "./pages/Auth";
-import SellItems from "./pages/SellItems";
+import { AuthProvider } from "./context/authContext.jsx";
+import Home from "./pages/Home.jsx";
+import ShopItems from "./pages/ShopItems.jsx";
+import Auth from "./pages/Auth.jsx";
+import SellItems from "./pages/SellItems.jsx";
+import HowReuseWorks from "./pages/HowReuseWorks.jsx";
 import ProtectedLayout from "./layout/ProtectedLayout";
 import SignIn from "./components/SignIn.jsx";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/SignUp.jsx";
 import Profile from "./pages/Profile.jsx";
-import ForgotPassword from "./components/ForgotPassword";
+import ForgotPassword from "./components/ForgotPassword.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="profile" element={<ProtectedLayout />}>
         <Route index element={<Profile />} />
       </Route>
+      <Route path="how-reuse-works" element={<HowReuseWorks />} />
       <Route path="auth" element={<Auth />}>
         <Route index element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
