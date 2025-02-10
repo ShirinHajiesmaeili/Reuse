@@ -1,21 +1,28 @@
-import multer from "multer";
-import { storage } from "../config/cloudinary.js";
-import ErrorResponse from "../utils/ErrorResponse.js";
+import multer from 'multer';
 
-/**
- * Configure Multer middleware for handling file uploads.
- */
-const upload = multer({
-  storage: storage, // Using Cloudinary storage
-  limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB limit
+const storage = multer.diskStorage({
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + file.originalname;
+    cb(null, uniqueSuffix);
   },
-  fileFilter: (req, file, cb) => {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-      return cb(new ErrorResponse("Only image files are allowed!", 400), false);
-    }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
     cb(null, true);
-  },
+  } else {
+    cb(new Error('Only images are allowed'), false);
+  }
+};
+
+const limits = {
+  fileSize: 5 * 1024 * 1024, // 5 MB
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: limits,
 });
 
 export default upload;

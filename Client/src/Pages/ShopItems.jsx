@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import ProductCard from '../Components/ProductCard';
+import ProductCard from '../components/ProductCard';
 import { CartContext } from '../context/CartContext';
 
 const ShopItems = () => {
