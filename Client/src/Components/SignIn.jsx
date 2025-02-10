@@ -4,7 +4,7 @@ import { AuthContext } from "../context/authContext";
 import { signIn } from "../data/authentication";
 
 const SignIn = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
@@ -20,8 +20,8 @@ const SignIn = () => {
     };
 
     try {
-      const userDetails = await signIn(data);
-      setUser(userDetails);
+      const { signedInUser } = await signIn(data);
+      setUser(signedInUser);
     } catch (error) {
       console.error(error);
       alert("Something went wrong");

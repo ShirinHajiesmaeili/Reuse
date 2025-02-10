@@ -1,11 +1,13 @@
 import jwt from "jsonwebtoken";
 
 const authenticate = (req, res, next) => {
-  const SECRET = process.env.JWT_SECRET || "b0cf624f19fbaec2a52d";
+  const SECRET = process.env.JWT_SECRET;
+  if (!SECRET) {
+    return res.status(401).json({ message: "Authentication secret missing" });
+  }
 
   /* Extract tokens from headers */
   const token = req.headers["authorization"];
-
   if (!token) {
     return res.status(401).json({ message: "Authentication token missing" });
   }

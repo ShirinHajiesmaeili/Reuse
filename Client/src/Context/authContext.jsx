@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  console.log("user in context ", user);
 
   useEffect(() => {
     const getUser = async () => {
@@ -13,8 +14,8 @@ const AuthProvider = ({ children }) => {
           withCredentials: true,
         });
         setUser(response.data);
-      } catch (error) {
-        console.error(error);
+      } catch {
+        setUser(null);
       }
     };
 
