@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { signUp } from "../data/authentication";
-import ErrorPopup from "../components/ErrorPopup"; // Importing the error popup
+import ErrorPopup from "./ErrorPopup"; // Importing the error popup
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);

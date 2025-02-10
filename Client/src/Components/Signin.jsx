@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { signIn } from "../data/authentication";
-import ErrorPopup from "../components/ErrorPopup"; // Importing the new component
+import ErrorPopup from "./ErrorPopup"; // Importing the new component
 
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
