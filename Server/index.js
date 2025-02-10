@@ -15,7 +15,7 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
-const env = process.env.NODE_ENV || "prod";
+const env = process.env.NODE_ENV || "production";
 
 /* Middleware */
 app.use(
@@ -33,13 +33,11 @@ app.use("/categories", categoryRouter);
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/zipcodes", zipcodesRouter);
-
-/* Error handling middleware */
-app.use((err, req, res, next) => {
-  console.error(err);
-  next(new ErrorResponse(`Route ${req.originalUrl} not found`, 404));
+app.use("/*", {
+  // TODO: default error URL
 });
 
+/* Error handling middleware */
 app.use((err, req, res, next) => {
   console.error(err);
 

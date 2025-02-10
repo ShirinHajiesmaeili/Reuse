@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Img2 from "../assets/images/Img2.jpg";
 import Img3 from "../assets/images/Img3.jpg";
@@ -20,12 +20,12 @@ const Home = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, []);
 
   return (
     <>
       {/* Image Carousel*/}
-      <div className="relative w-screen h-[800px] pt-3">
+      <div className="relative w-screen h-[800px]">
         <img
           src={images[currentImageIndex]}
           alt="Carousel"

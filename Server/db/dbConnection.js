@@ -1,13 +1,17 @@
 import mongoose from "mongoose";
+import ErrorResponse from "../utils/ErrorResponse.js";
 
 /* 
 Remember to add a .env file with your MongoDB Connection string. 
 Also update the 'dev' script to include the .env file 
 */
 const connectDB = async () => {
-  const MONGO_URI =
-    process.env.MONGO_URI ||
-    "mongodb+srv://admin:vbcUe6_X3KgjUwL@cluster0.tx97f.mongodb.net/reuse";
+  const MONGO_URI = process.env.MONGO_URI;
+  if (!MONGO_URI) {
+    return next(
+      new ErrorResponse("Database connection error \n Error No #382615", 400)
+    );
+  }
 
   try {
     await mongoose.connect(MONGO_URI);

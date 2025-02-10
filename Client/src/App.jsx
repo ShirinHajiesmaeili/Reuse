@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
+
 import Detail from "./pages/Detail.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { AuthProvider } from "./context/authContext.jsx";
@@ -13,13 +14,12 @@ import ShopItems from "./pages/ShopItems.jsx";
 import Auth from "./pages/Auth.jsx";
 import SellItems from "./pages/SellItems.jsx";
 import HowReuseWorks from "./pages/HowReuseWorks.jsx";
+
 import ProtectedLayout from "./layout/ProtectedLayout";
 import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
 import Profile from "./pages/Profile.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
-
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
