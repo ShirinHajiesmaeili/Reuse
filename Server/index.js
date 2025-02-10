@@ -33,8 +33,8 @@ app.use("/categories", categoryRouter);
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/zipcodes", zipcodesRouter);
-app.use("/*", {
-  // TODO: default error URL
+app.use("/*", (req, res) => {
+  res.statusCode(404).json({ error: "Route not found" });
 });
 
 /* Error handling middleware */
