@@ -5,9 +5,7 @@ const baseUrl = "http://localhost:3000";
 export const signIn = async (data) => {
   try {
     const response = await axios.post(`${baseUrl}/auth/signin`, data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      withCredentials: true,
     });
 
     return response.data;
