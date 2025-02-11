@@ -1,14 +1,14 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUp } from "../data/authentication";
-
+import ErrorPopup from "./ErrorPopup";
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
+    setError("");
 
     event.preventDefault();
 
@@ -23,12 +23,26 @@ const SignUp = () => {
       password: formData.get("password"),
       confirmPassword: formData.get("confirmPassword"),
     };
+
+    if (data.password !== data.confirmPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
+    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail(data.email)) {
+      setError("Invalid email address");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       await signUp(data);
       navigate("/auth");
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      setError("Error creating account. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -39,6 +53,9 @@ const SignUp = () => {
       <h2 className="text-center text-3xl font-extrabold text-gray-900">
         Create an Account
       </h2>
+
+      <ErrorPopup message={error} onClose={() => setError("")} />
+
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div>
@@ -153,7 +170,7 @@ const SignUp = () => {
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         >
-          Create an Account
+          {isLoading ? "Creating account..." : "Create an Account"}
         </button>
 
         <div className="text-center">
