@@ -1,14 +1,17 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { signIn } from "../data/authentication";
+import ErrorPopup from "./ErrorPopup";
 
 const SignIn = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
+    setError("");
 
     event.preventDefault();
 
@@ -21,10 +24,11 @@ const SignIn = () => {
 
     try {
       const userDetails = await signIn(data);
+      //console.log(userDetails);
       setUser(userDetails);
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      setError("Invalid email or password");
     } finally {
       setIsLoading(false);
     }
@@ -35,6 +39,9 @@ const SignIn = () => {
       <h2 className="text-center text-3xl font-extrabold text-gray-900">
         Sign In
       </h2>
+
+      <ErrorPopup message={error} onClose={() => setError("")} />
+
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div>
@@ -85,7 +92,7 @@ const SignIn = () => {
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         >
-          Sign In
+          {isLoading ? "Signing in..." : "Sign In"}
         </button>
 
         <div className="text-center">
