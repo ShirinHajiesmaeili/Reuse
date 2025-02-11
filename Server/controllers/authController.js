@@ -12,7 +12,8 @@ export const signUp = asyncHandler(async (req, res, next) => {
     email,
     password,
     isAdmin = false,
-    location: { zipCode, city },
+    zipCode,
+    city,
   } = req.body;
 
   /* Check if user already exists */
