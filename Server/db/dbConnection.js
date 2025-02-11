@@ -8,9 +8,7 @@ Also update the 'dev' script to include the .env file
 const connectDB = async () => {
   const MONGO_URI = process.env.MONGO_URI;
   if (!MONGO_URI) {
-    return next(
-      new ErrorResponse("Database connection error \n Error No #382615", 400)
-    );
+    new ErrorResponse("Database connection error\nError No #382615", 400);
   }
 
   try {

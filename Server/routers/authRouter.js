@@ -17,6 +17,7 @@ authRouter.post("/signup", signUp);
 
 /* LogIn */
 authRouter.post("/signin", signIn); // TODO: what if someone is already in?
+// TODO: what to prevent robot trying to login
 
 /* LogOut */
 authRouter.delete("/signout", verifyToken, signOut);
