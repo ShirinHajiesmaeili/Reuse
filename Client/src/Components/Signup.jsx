@@ -1,36 +1,34 @@
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { signUp } from "../data/authentication";
-import ErrorPopup from "./ErrorPopup"; // Importing the error popup
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(""); // State to store the error message
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
-    setError(""); // Reset error when trying again
 
     event.preventDefault();
 
     const formData = new FormData(event.target);
 
     const data = {
-      name: formData.get("name"),
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
       email: formData.get("email"),
       city: formData.get("city"),
       zipCode: formData.get("zipCode"),
       password: formData.get("password"),
       confirmPassword: formData.get("confirmPassword"),
     };
-
     try {
       await signUp(data);
-      navigate("/auth/signin");
+      navigate("/auth");
     } catch (error) {
       console.error(error);
-      setError("Error creating account. Please try again."); // Set the error message
+      alert("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -41,26 +39,43 @@ const SignUp = () => {
       <h2 className="text-center text-3xl font-extrabold text-gray-900">
         Create an Account
       </h2>
-
-      {/* Error popup component */}
-      <ErrorPopup message={error} onClose={() => setError("")} />
-
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Full Name
+            <label
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              First Name
             </label>
             <input
-              id="name"
-              name="name"
+              id="firstName"
+              name="firstName"
               type="text"
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="lastName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Last Name
+            </label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -72,7 +87,10 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="city"
+              className="block text-sm font-medium text-gray-700"
+            >
               City
             </label>
             <input
@@ -84,7 +102,10 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="zipCode"
+              className="block text-sm font-medium text-gray-700"
+            >
               Zip Code
             </label>
             <input
@@ -96,7 +117,10 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -108,7 +132,10 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
               Confirm Password
             </label>
             <input
@@ -126,12 +153,15 @@ const SignUp = () => {
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         >
-          {isLoading ? "Creating account..." : "Create an Account"}
+          Create an Account
         </button>
 
         <div className="text-center">
           <Link to="/auth">
-            <button type="button" className="text-sm text-teal-600 hover:text-teal-500">
+            <button
+              type="button"
+              className="text-sm text-teal-600 hover:text-teal-500"
+            >
               Already have an account? Sign In
             </button>
           </Link>
