@@ -28,7 +28,8 @@ router.delete("/signout", async (req, res) => {
         .json({ error: "Kein Token vorhanden, Zugriff verweigert" });
     }
 
-    // Anfrage an den externen Server weiterleiten
+    /* Anfrage an den externen Server weiterleiten */
+    // TODO: Get URL from .env
     const response = await axios.delete("http://localhost:3000/auth/signout", {
       headers: {
         Authorization: token,
@@ -62,13 +63,13 @@ router.delete("/signout", async (req, res) => {
  *               properties:
  *                 firstName:
  *                   type: string
- *                   example: "Robin"
+ *                   example: "John"
  *                 lastName:
  *                   type: string
- *                   example: "G."
+ *                   example: "Doe"
  *                 email:
  *                   type: string
- *                   example: "robin.goerlach@sasd.de"
+ *                   example: "john.doe@gmail.com"
  *                 age:
  *                   type: integer
  *                   example: 30
@@ -77,10 +78,10 @@ router.delete("/signout", async (req, res) => {
  *                   example: false
  *                 location:
  *                   type: string
- *                   example: "Berlin"
+ *                   example: "Small planet - Milky Way (Orion Arm)"
  *                 customerExperience:
- *                   type: string
- *                   example: "Erfahrungen mit Projektmanagement und Teamführung."
+ *                   type: integer
+ *                   example: 3
  *       401:
  *         description: Unauthorized - user not authenticated
  *       500:
@@ -88,7 +89,8 @@ router.delete("/signout", async (req, res) => {
  */
 router.get("/me", async (req, res) => {
   try {
-    // Sende die Anfrage an den externen Server
+    /* Sende die Anfrage an den externen Server */
+    // TODO: Get url from .env
     const response = await axios.get("http://localhost:3000/auth/me", {
       headers: {
         Authorization: req.headers.authorization || "",
@@ -140,10 +142,10 @@ router.get("/me", async (req, res) => {
  *                 example: false
  *               location:
  *                 type: string
- *                 example: "Small planat - Milkyway Orionarm"
+ *                 example: "Small planet - Milkyway Orionarm"
  *               customerExperience:
- *                 type: string
- *                 example: "Phantastic seller"
+ *                 type: integer
+ *                 example: 3
  *     responses:
  *       201:
  *         description: User created successfully
@@ -152,6 +154,7 @@ router.get("/me", async (req, res) => {
  */
 router.post("/signup", async (req, res) => {
   try {
+    // TODO: Get URL from .env
     const response = await axios.post(
       "http://localhost:3000/auth/signup",
       req.body
@@ -196,6 +199,7 @@ router.post("/signup", async (req, res) => {
  */
 router.post("/signin", async (req, res) => {
   try {
+    // TODO: Get URL from .env
     const response = await axios.post(
       "http://localhost:3000/auth/signin",
       req.body

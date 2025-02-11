@@ -1,7 +1,9 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SellItems = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -32,26 +34,27 @@ const SellItems = () => {
       return alert("All fields are required.");
     }
 
-    const newPostData = {
-      title,
-      description,
-      zipcode,
-      city,
-      price,
-      quantity,
-      deliveryOption,
-      category,
-      image,
-    };
+    const newPostData = new FormData();
+    newPostData.append("title", title);
+    newPostData.append("description", description);
+    newPostData.append("zipcode", zipcode);
+    newPostData.append("city", city);
+    newPostData.append("price", price);
+    newPostData.append("quantity", quantity);
+    newPostData.append("deliveryOption", deliveryOption);
+    newPostData.append("category", category);
+    newPostData.append("image", image);
 
     // Posting the data
     try {
       const res = await axios.post("http://localhost:3000/posts", newPostData, {
         withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
       });
       console.log(res);
+      navigate("/shop-items");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -61,7 +64,7 @@ const SellItems = () => {
         className="max-w-screen-md min-h-[80vh] mx-auto flex flex-col items-center gap-4"
         onSubmit={handleSubmit}
       >
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Title <span className="text-red-400">&#42;</span>
@@ -69,11 +72,12 @@ const SellItems = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-bordered w-full"
             name="title"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Description <span className="text-red-400">&#42;</span>
@@ -82,21 +86,23 @@ const SellItems = () => {
           <textarea
             className="input input-bordered w-full resize-none min-h-32"
             name="description"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Zipcode <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
-            type="text"
-            className="input input-bordered w-full "
+            type="number"
+            className="input input-bordered w-full"
             name="zipcode"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               City <span className="text-red-400">&#42;</span>
@@ -104,35 +110,38 @@ const SellItems = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-bordered w-full"
             name="city"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Price <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
-            type="text"
-            className="input input-bordered w-full "
+            type="number"
+            className="input input-bordered w-full"
             name="price"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Quantity <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
-            type="text"
-            className="input input-bordered w-full "
+            type="number"
+            className="input input-bordered w-full"
             name="quantity"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Delivery Option <span className="text-red-400">&#42;</span>
@@ -140,11 +149,12 @@ const SellItems = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-bordered w-full"
             name="deliveryoption"
+            required
           />
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Category <span className="text-red-400">&#42;</span>
@@ -154,6 +164,7 @@ const SellItems = () => {
             className="input input-bordered w-full"
             name="category"
             defaultValue=""
+            required
           >
             <option value="" disabled>
               Select a category
@@ -173,16 +184,18 @@ const SellItems = () => {
             <option value="pets">Pets</option>
           </select>
         </label>
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Image <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
-            type="text"
-            className="input input-bordered w-full "
+            type="file"
+            className="input input-bordered w-full"
             name="image"
+            accept="image/*"
+            required
           />
         </label>
         <button className="btn btn-primary w-full">Sell New Item</button>
