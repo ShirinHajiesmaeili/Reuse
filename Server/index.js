@@ -14,8 +14,8 @@ connectDB();
 const app = express();
 
 const port = process.env.PORT || 3000;
-const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
 const env = process.env.NODE_ENV || "production";
+const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
 
 /* Middleware */
 app.use(
@@ -34,17 +34,17 @@ app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/zipcodes", zipcodesRouter);
 app.use("/*", (req, res) => {
-  res.statusCode(404).json({ error: "Route not found" });
+  res.status(404).json({ error: "Route not found" });
 });
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {
   console.error(err);
 
-  let statusCode = err.statusCode || 500;
-  let message = err.message || "Internal Server Error";
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
 
-  if (env !== "prod") {
+  if (env !== "production") {
     res.status(statusCode).json({
       success: false,
       message,
@@ -58,6 +58,10 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(` Server running on http://localhost:${port}`);
+app.listen(port, (err) => {
+  if (err) {
+    console.error(`Error starting server: ${err.message}`);
+  } else {
+    console.log(`Server running on http://localhost:${port}`);
+  }
 });
