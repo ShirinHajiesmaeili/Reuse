@@ -8,6 +8,7 @@ export const signIn = async (data) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     });
 
     return response.data;
@@ -38,6 +39,7 @@ export const signOut = async () => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     });
 
     return response.data;

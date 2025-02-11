@@ -1,18 +1,34 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom"; // Correct import
+import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "../data/authentication";
+import { AuthContext } from "../context/AuthContext";
 
 const Profile = () => {
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userLocation, setUserLocation] = useState("");
+  const { setUser, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const signOutHandler = async () => {
+    try {
+      setIsLoading(true);
+      await signOut();
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen p-6 flex flex-col md:flex-row">
       {/* Sidebar */}
       <aside className="w-full md:w-1/4 p-4">
         <h2 className="text-xl font-bold text-primary mb-4">
-          Welcome, {userName}.
+          Welcome, {user.firstName}.
         </h2>
         <nav className="space-y-2">
           <motion.button
@@ -48,8 +64,10 @@ const Profile = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             className="w-full flex items-center p-3 bg-red-100 text-red-700 rounded-lg"
+            onClick={signOutHandler}
+            disabled={isLoading}
           >
-            Logout
+            {isLoading ? "Logging out" : "Logout"}
           </motion.button>
         </nav>
       </aside>

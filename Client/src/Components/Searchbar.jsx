@@ -1,12 +1,11 @@
 import { useState } from "react";
+import { getAllZipCodes } from "../data/zipCode.js";
 
 const Searchbar = () => {
   const [zipCodes, setZipCodes] = useState([]);
-  const [zipCodeInput, setZipCodeInput] = useState("");
 
   const changeHandler = async (event) => {
     const value = event.target.value;
-    setZipCodeInput(value);
 
     if (value.length < 2) {
       setZipCodes([]);
@@ -14,21 +13,8 @@ const Searchbar = () => {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/zipcodes?zipCode=${value}`
-      );
-
-      console.log("Response Status:", response.status);
-
-      if (!response.ok) {
-        console.error("Failed to fetch data");
-        return;
-      }
-
-      const data = await response.json();
-      console.log("Fetched Zip Codes:", data);
-
-      setZipCodes(data);
+      const allZipCodes = await getAllZipCodes(value);
+      setZipCodes(allZipCodes);
     } catch (error) {
       console.error("Error fetching zip codes:", error);
     }
@@ -69,11 +55,7 @@ const Searchbar = () => {
           type="text"
           className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
           placeholder="Zip Code"
-          value={zipCodeInput}
-          onChange={(event) => {
-            console.log("Zip Code Input:", event.target.value);
-            changeHandler(event);
-          }}
+          onChange={changeHandler}
         />
 
         {zipCodes.length > 0 && (

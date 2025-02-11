@@ -1,60 +1,64 @@
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { createProduct } from "../data/product";
+import { getAllZipCodes } from "../data/zipCode";
 
 const SellItems = () => {
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [zipCodes, setZipCodes] = useState([]);
+
+  const handleZipCodeChange = async (event) => {
+    const value = event.target.value;
+
+    if (value.length < 2) {
+      setZipCodes([]);
+      return;
+    }
+
+    try {
+      const data = await getAllZipCodes(value);
+      setZipCodes(data);
+    } catch (error) {
+      console.error("Error fetching zip codes:", error);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Extract value from input field
     const formdata = new FormData(event.target);
-    const title = formdata.get("title");
+    const name = formdata.get("name");
     const description = formdata.get("description");
-    const zipcode = formdata.get("zipcode");
-    const city = formdata.get("city");
+    const zipCode = formdata.get("zipCode");
     const price = formdata.get("price");
     const quantity = formdata.get("quantity");
-    const deliveryOption = formdata.get("deliveryoption");
     const category = formdata.get("category");
     const image = formdata.get("image");
 
     // Validation
     if (
-      !title ||
+      !name ||
       !description ||
-      !zipcode ||
-      !city ||
+      !zipCode ||
       !price ||
       !quantity ||
-      !deliveryOption ||
       !category ||
       !image
     ) {
       return alert("All fields are required.");
     }
 
-    const newPostData = new FormData();
-    newPostData.append("title", title);
-    newPostData.append("description", description);
-    newPostData.append("zipcode", zipcode);
-    newPostData.append("city", city);
-    newPostData.append("price", price);
-    newPostData.append("quantity", quantity);
-    newPostData.append("deliveryOption", deliveryOption);
-    newPostData.append("category", category);
-    newPostData.append("image", image);
-
     // Posting the data
     try {
-      const res = await axios.post("http://localhost:3000/posts", newPostData, {
-        withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log(res);
+      setIsLoading(true);
+      await createProduct(formdata);
       navigate("/shop-items");
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -63,6 +67,7 @@ const SellItems = () => {
       <form
         className="max-w-screen-md min-h-[80vh] mx-auto flex flex-col items-center gap-4"
         onSubmit={handleSubmit}
+        encType="multipart/form-data"
       >
         <label className="form-control w-full">
           <div className="label">
@@ -73,7 +78,7 @@ const SellItems = () => {
           <input
             type="text"
             className="input input-bordered w-full"
-            name="title"
+            name="name"
             required
           />
         </label>
@@ -92,28 +97,29 @@ const SellItems = () => {
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
-              Zipcode <span className="text-red-400">&#42;</span>
+              Zip Code <span className="text-red-400">&#42;</span>
             </span>
           </div>
           <input
             type="number"
             className="input input-bordered w-full"
-            name="zipcode"
             required
+            onChange={handleZipCodeChange}
           />
         </label>
         <label className="form-control w-full">
-          <div className="label">
-            <span className="label-text text-xl">
-              City <span className="text-red-400">&#42;</span>
-            </span>
-          </div>
-          <input
-            type="text"
-            className="input input-bordered w-full"
-            name="city"
-            required
-          />
+          {zipCodes.length > 0 && (
+            <select
+              className="px-6 py-2 border rounded-full focus:ring-2 focus:ring-blue-500 text-primary flex-1"
+              name="zipCode"
+            >
+              {zipCodes.map((item, index) => (
+                <option key={index} value={item.postalCode}>
+                  {item.postalCodeNameLong}
+                </option>
+              ))}
+            </select>
+          )}
         </label>
         <label className="form-control w-full">
           <div className="label">
@@ -141,7 +147,7 @@ const SellItems = () => {
             required
           />
         </label>
-        <label className="form-control w-full">
+        {/* <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
               Delivery Option <span className="text-red-400">&#42;</span>
@@ -153,7 +159,7 @@ const SellItems = () => {
             name="deliveryoption"
             required
           />
-        </label>
+        </label> */}
         <label className="form-control w-full">
           <div className="label">
             <span className="label-text text-xl">
@@ -198,7 +204,9 @@ const SellItems = () => {
             required
           />
         </label>
-        <button className="btn btn-primary w-full">Sell New Item</button>
+        <button className="btn btn-primary w-full" disabled={isLoading}>
+          {isLoading ? "Posting item..." : "Sell new item"}
+        </button>
       </form>
     </main>
   );

@@ -12,7 +12,8 @@ export const signUp = asyncHandler(async (req, res, next) => {
     email,
     password,
     isAdmin = false,
-    location: { zipCode, city },
+    zipCode,
+    city,
   } = req.body;
 
   /* Check if user already exists */
@@ -33,7 +34,6 @@ export const signUp = asyncHandler(async (req, res, next) => {
     password: hashedPassword,
     isAdmin,
     location: { zipCode, city },
-    customerExperience,
   });
 
   // TODO: Need additional security checks or user roles (e.g. admin checks)
@@ -150,7 +150,7 @@ export const getUser = asyncHandler(async (req, res, next) => {
   //console.log(req.userEmail);
 
   try {
-    const user = await User.findOne({ _id: req.user.id }).select("-password");
+    const user = await User.findOne({ _id: req.userID }).select("-password");
     if (!user) {
       return next(new ErrorResponse("User not found", 404));
     }
@@ -159,7 +159,7 @@ export const getUser = asyncHandler(async (req, res, next) => {
     //res.send(user);
     res.status(200).json({
       success: true,
-      data: {
+      signedInUser: {
         id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,

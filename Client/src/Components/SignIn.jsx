@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { signIn } from "../data/authentication";
@@ -8,6 +8,7 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
@@ -23,9 +24,9 @@ const SignIn = () => {
     };
 
     try {
-      const userDetails = await signIn(data);
-      //console.log(userDetails);
-      setUser(userDetails);
+      const { signedInUser } = await signIn(data);
+      setUser(signedInUser);
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError("Invalid email or password");

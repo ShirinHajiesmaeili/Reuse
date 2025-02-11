@@ -2,7 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUp } from "../data/authentication";
 import ErrorPopup from "./ErrorPopup";
+
 const SignUp = () => {
+  const navigate = useNavigate("/");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 

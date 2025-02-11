@@ -1,15 +1,13 @@
-
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import categoryRouter from "./routers/categoryRouter.js";
 import connectDB from "./db/dbConnection.js";
-import { errorHandler } from "./middlewares/errorHandler.js";
+import productRouter from "./routers/productRouter.js";
 import authRouter from "./routers/authRouter.js";
 import cartRouter from "./routers/cartRouter.js";
 import zipcodesRouter from "./routers/zipcodesRouter.js";
 import ErrorResponse from "./utils/ErrorResponse.js";
-
 
 connectDB();
 
@@ -32,6 +30,7 @@ app.use(cookieParser());
 
 /* Routes */
 app.use("/categories", categoryRouter);
+app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/cart", cartRouter);
 app.use("/zipcodes", zipcodesRouter);

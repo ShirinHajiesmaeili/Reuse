@@ -5,15 +5,15 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  console.log("user in context ", user);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/auth/me", {
+        const { data } = await axios.get("http://localhost:3000/auth/me", {
           withCredentials: true,
         });
-        setUser(response.data);
+
+        setUser(data.signedInUser);
       } catch {
         setUser(null);
       }

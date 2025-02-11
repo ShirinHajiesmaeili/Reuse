@@ -23,11 +23,6 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
-    age: {
-      type: Number,
-      required: false,
-      min: 0,
-    },
     isAdmin: {
       type: Boolean,
       default: false,
