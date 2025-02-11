@@ -50,7 +50,7 @@ const SignUp = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-extrabold text-gray-900">
+      <h2 className="text-center text-3xl font-extrabold text-tertiary">
         Create an Account
       </h2>
 
@@ -61,7 +61,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="firstName"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               First Name
             </label>
@@ -76,7 +76,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="lastName"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Last Name
             </label>
@@ -91,7 +91,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Email
             </label>
@@ -106,7 +106,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="city"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               City
             </label>
@@ -121,7 +121,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="zipCode"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Zip Code
             </label>
@@ -136,7 +136,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Password
             </label>
@@ -151,7 +151,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Confirm Password
             </label>

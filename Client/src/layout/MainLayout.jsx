@@ -13,41 +13,41 @@ const Layout = () => {
   const [chatMessages, setChatMessages] = useState([
     { sender: "bot", text: "Hello! Thank you for your message!" },
   ]);
-  //   const [chatInput, setChatInput] = useState("");
-  //   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
-  //   useEffect(() => {
-  //     const handleScroll = () => {
-  //       const totalScroll =
-  //         (document.documentElement.scrollHeight - window.innerHeight) / 2;
-  //       const rawProgress = (window.scrollY / totalScroll) * 100;
-  //       const easedProgress = Math.min(easeOutQuad(rawProgress / 100) * 100, 100);
-  //       setScrollProgress(easedProgress);
-  //     };
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll =
+        (document.documentElement.scrollHeight - window.innerHeight) / 2;
+      const rawProgress = (window.scrollY / totalScroll) * 100;
+      const easedProgress = Math.min(easeOutQuad(rawProgress / 100) * 100, 100);
+      setScrollProgress(easedProgress);
+    };
 
-  //   const easeOutQuad = (t) => {
-  //     return t * (2 - t);
-  //   };
+    const easeOutQuad = (t) => {
+      return t * (2 - t);
+    };
 
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  // const handleChatSend = () => {
-  //   if (chatInput.trim()) {
-  //     setChatMessages((prev) => [...prev, { sender: "user", text: chatInput }]);
-  //     setTimeout(() => {
-  //       setChatMessages((prev) => [
-  //         ...prev,
-  //         { sender: "bot", text: "How can I assist you today?" },
-  //       ]);
-  //     }, 1000);
-  //     setChatInput("");
-  //   }
-  // };
+  const handleChatSend = () => {
+    if (chatInput.trim()) {
+      setChatMessages((prev) => [...prev, { sender: "user", text: chatInput }]);
+      setTimeout(() => {
+        setChatMessages((prev) => [
+          ...prev,
+          { sender: "bot", text: "How can I assist you today?" },
+        ]);
+      }, 1000);
+      setChatInput("");
+    }
+  };
 
   return (
-    <div>
+    <div className="bg-gray-100 flex flex-col min-h-screen">
       {statusTab && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"

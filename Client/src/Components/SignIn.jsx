@@ -36,7 +36,7 @@ const SignIn = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-extrabold text-gray-900">
+      <h2 className="text-center text-3xl font-extrabold text-tertiary">
         Sign In
       </h2>
 
@@ -47,7 +47,7 @@ const SignIn = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Email
             </label>
@@ -62,7 +62,7 @@ const SignIn = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Password
             </label>
