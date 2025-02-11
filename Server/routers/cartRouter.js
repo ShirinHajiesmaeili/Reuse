@@ -12,13 +12,12 @@ cartRouter.get("/", cartController.getCart);
 cartRouter.post("/add", cartController.addToCart);
 
 /* Remove an item from the cart */
-// TODO: delete("/remove/:id" ...
-cartRouter.delete("/remove", cartController.removeFromCart);
+cartRouter.delete("/remove/:itemId", cartController.removeFromCart);
 
 /* Clear the cart */
 cartRouter.delete("/clear", cartController.clearCart);
 
-// Update cart
+/* Update cart */
 // TODO: cartRouter.put("/edit", cartController.editCart);
 
 export default cartRouter;

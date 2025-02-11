@@ -1,6 +1,6 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 import { signIn } from "../data/authentication";
 import ErrorPopup from "./ErrorPopup"; // Importing the new component
 
@@ -24,6 +24,7 @@ const SignIn = () => {
 
     try {
       const userDetails = await signIn(data);
+      //console.log(userDetails);
       setUser(userDetails);
     } catch (error) {
       console.error(error);
@@ -35,7 +36,9 @@ const SignIn = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign In</h2>
+      <h2 className="text-center text-3xl font-extrabold text-gray-900">
+        Sign In
+      </h2>
 
       {/* Error Component */}
       <ErrorPopup message={error} onClose={() => setError("")} />
@@ -43,7 +46,10 @@ const SignIn = () => {
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
@@ -55,7 +61,10 @@ const SignIn = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -70,7 +79,10 @@ const SignIn = () => {
 
         <div className="flex items-center justify-between">
           <Link to="/auth/forgotpassword">
-            <button type="button" className="text-sm text-teal-600 hover:text-teal-500">
+            <button
+              type="button"
+              className="text-sm text-teal-600 hover:text-teal-500"
+            >
               Forgot password?
             </button>
           </Link>
@@ -86,7 +98,10 @@ const SignIn = () => {
 
         <div className="text-center">
           <Link to="/auth/signup">
-            <button type="button" className="text-sm text-teal-600 hover:text-teal-500">
+            <button
+              type="button"
+              className="text-sm text-teal-600 hover:text-teal-500"
+            >
               Don&apos;t have an account? Sign Up
             </button>
           </Link>
