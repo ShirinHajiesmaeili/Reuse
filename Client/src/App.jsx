@@ -7,7 +7,7 @@ import {
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
-import { AuthProvider } from "./context/authContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import Home from "./pages/Home.jsx";
 import ShopItems from "./pages/ShopItems.jsx";
 import Auth from "./pages/Auth.jsx";

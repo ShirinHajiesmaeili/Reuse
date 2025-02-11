@@ -11,130 +11,120 @@ export const signUp = asyncHandler(async (req, res, next) => {
     lastName,
     email,
     password,
-    age,
-    isAdmin,
-    location,
-    customerExperience,
+    isAdmin = false,
+    location: { zipCode, city },
   } = req.body;
 
-  try {
-    /* Check if user already exists */
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return next(
-        new ErrorResponse("User with this email already exists", 400)
-      );
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
-
-    // Create user
-    const user = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
-      age,
-      isAdmin,
-      location,
-      customerExperience,
-    });
-
-    // TODO: Need additional security checks or user roles (e.g. admin checks)
-    // TODO: Should we verify eMail existence
-
-    // Create JWT token
-    const token = jwt.sign(
-      { email: user.email, id: user._id },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      }
-    );
-
-    // TODO: Login new User automatically or refere to SignIp page?
-
-    /* Response */
-    //res.send(newUser);
-    res.status(201).json({
-      success: true,
-      data: {
-        id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        location: user.location,
-        customerExperience: user.customerExperience,
-      },
-      token,
-    });
-  } catch (error) {
-    next(error);
+  /* Check if user already exists */
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return next(new ErrorResponse("User with this email already exists", 400));
   }
+
+  /* Create hash password */
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log(hashedPassword);
+
+  /* Create user */
+  const user = await User.create({
+    firstName,
+    lastName,
+    email,
+    password: hashedPassword,
+    isAdmin,
+    location: { zipCode, city },
+    customerExperience,
+  });
+
+  // TODO: Need additional security checks or user roles (e.g. admin checks)
+  // TODO: Should we verify eMail existence
+  // TODO: Login new User automatically or refere to SignIp page?
+
+  /* Send Response */
+  //res.send(newUser);
+  res.status(201).json({
+    success: true,
+    data: {
+      userID: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      location: user.location,
+      customerExperience: user.customerExperience,
+    },
+  });
 });
 
 /* Login as existing User (POST /auth/signin) */
 export const signIn = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-  const SECRET = process.env.JWT_SECRET || "b0cf624f19fbaec2a52d";
   //console.log(password);
+
+  if (!email || !password) {
+    return next(new ErrorResponse("Email and password are required", 400));
+  }
+
+  const SECRET = process.env.JWT_SECRET;
+  if (!SECRET)
+    return next(
+      new ErrorResponse(
+        "The Username or Password is Incorrect. Try again.\nError: #13454",
+        401
+      )
+    );
   //console.log(SECRET);
 
-  try {
-    /* Verify User */
-    const user = await User.findOne({ email }).select("+password");
-    if (!user)
-      return next(
-        new ErrorResponse(
-          "The Username or Password is Incorrect. Try again. \n Error: #13455",
-          401
-        )
-      );
+  /* Verify User */
+  const user = await User.findOne({ email }).select("+password");
+  if (!user)
+    return next(
+      new ErrorResponse(
+        "The Username or Password is Incorrect. Try again.\nError: #13455",
+        401
+      )
+    );
 
-    /* Is password correct? */
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return next(
-        new ErrorResponse(
-          "The Username or Password is Incorrect. Try again. \n Error: #13456",
-          401
-        )
-      );
+  /* Verify password */
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch)
+    return next(
+      new ErrorResponse(
+        "The Username or Password is Incorrect. Try again.\nError: #13456",
+        401
+      )
+    );
 
-    /* Object containig the current connected user */
-    // TODO: do we need more
-    const signedInUser = {
-      id: user._id,
-      name: user.firstName,
-      email: user.email,
-    };
-    //console.log(user.firstname);
+  /* Object containig the current connected user */
+  // TODO: do we need more
+  const signedInUser = {
+    userID: user._id,
+    firstName: user.firstName,
+    location: user.location,
+    isAdmin: user.isAdmin,
+    email: user.email,
+  };
+  //console.log(user.firstname);
 
-    /* Create new Token for connected user */
-    const token = jwt.sign(signedInUser, SECRET, {
-      expiresIn: "7d",
-    });
-    console.log(token);
+  /* Create new Token for connected user */
+  const token = jwt.sign(signedInUser, SECRET, {
+    expiresIn: "7d",
+  });
+  console.log(token);
 
-    /* Accept Cookie transfer using HTTP (Yeah/noop) */
-    const isProd = process.env.NODE_ENV === "production";
-    const cookieOptions = {
-      httpOnly: true,
-      sameSite: isProd ? "None" : "Lax",
-      secure: isProd,
-    };
+  /* Accept Cookie transfer using HTTP (Yeah/noop) */
+  const isProd = process.env.NODE_ENV === "production";
+  const cookieOptions = {
+    httpOnly: true,
+    sameSite: isProd ? "None" : "Lax",
+    secure: isProd,
+  };
 
-    /* Create cookie on user browser and prepare userContext on frontend */
-    res.cookie("token", token, cookieOptions).status(200).json({
-      success: true,
-      token,
-      signedInUser,
-    });
-  } catch (error) {
-    next(error); // Fehler an Fehler-Handler weitergeben
-  }
+  /* Create cookie on user browser and prepare userContext on frontend */
+  res.cookie("token", token, cookieOptions).status(200).json({
+    success: true,
+    token,
+    signedInUser,
+  });
 
   /* Send token to frontend if needed */
   //res.send(token);
