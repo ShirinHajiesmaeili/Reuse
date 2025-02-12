@@ -1,16 +1,17 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "../utils/asyncHandler.js";
+import ErrorResponse from "../utils/ErrorResponse.js";
 
 const verifyToken = asyncHandler(async (req, res, next) => {
   const SECRET = process.env.JWT_SECRET;
 
-  console.log(req.cookies);
   const { token } = req.cookies;
 
   const { userID } = jwt.verify(token, SECRET);
 
   req.userID = userID;
 
+  /* Pass payload as request object to next container */
   next();
 });
 
