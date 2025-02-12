@@ -49,6 +49,38 @@ const productSchema = new Schema({
       required: true,
       trim: true
     }
+  },
+  images: [{
+    url: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function(v) {
+          return v.includes("cloudinary.com");
+        },
+        message: "Invalid image URL"
+      }
+    },
+    publicId: {
+      type: String,
+      required: true
+    }
+  }],
+  mainImage: {
+    url: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function(v) {
+          return v.includes("cloudinary.com");
+        },
+        message: "Invalid image URL"
+      }
+    },
+    publicId: {
+      type: String,
+      required: true
+    }
   }
 }, { timestamps: true });
 
