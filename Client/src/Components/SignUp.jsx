@@ -1,13 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { signUp } from "../data/authentication";
 import ErrorPopup from "./ErrorPopup";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
@@ -53,7 +52,7 @@ const SignUp = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-extrabold text-tertiary">
+      <h2 className="text-center text-3xl font-extrabold text-gray-900">
         Create an Account
       </h2>
 
@@ -64,7 +63,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="firstName"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               First Name
             </label>
@@ -79,7 +78,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="lastName"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               Last Name
             </label>
@@ -94,7 +93,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               Email
             </label>
@@ -109,7 +108,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="city"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               City
             </label>
@@ -124,7 +123,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="zipCode"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               Zip Code
             </label>
@@ -139,7 +138,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               Password
             </label>
@@ -154,7 +153,7 @@ const SignUp = () => {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-primary"
+              className="block text-sm font-medium text-gray-700"
             >
               Confirm Password
             </label>
