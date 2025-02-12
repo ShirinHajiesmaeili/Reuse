@@ -1,6 +1,9 @@
 import Product from "../models/Product.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
+import cloudinary from "../utils/cloudinary.js";
+
+
 
 export const getAllProducts = asyncHandler(async (req, res, next) => {
   const { name } = req.query;
@@ -23,6 +26,13 @@ export const getProductByName = asyncHandler(async (req, res, next) => {
 
 export const createProduct = asyncHandler(async (req, res, next) => {
   const { body } = req;
+  const { public_id, secure_url } = await cloudinary.uploader.upload(
+    req.file.path,
+    {
+      folder: 'products',
+    }
+  );
+
 
   const newProduct = await Product.create(body);
   res.status(201).json(newProduct);

@@ -3,11 +3,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { signIn } from "../data/authentication";
 import ErrorPopup from "./ErrorPopup";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
@@ -23,9 +25,9 @@ const SignIn = () => {
     };
 
     try {
-      const userDetails = await signIn(data);
-      //console.log(userDetails);
-      setUser(userDetails);
+      const { signInUser } = await signIn(data);
+      setUser(signInUser);
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError("Invalid email or password");
@@ -36,7 +38,7 @@ const SignIn = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-extrabold text-gray-900">
+      <h2 className="text-center text-3xl font-extrabold text-tertiary">
         Sign In
       </h2>
 
@@ -47,7 +49,7 @@ const SignIn = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Email
             </label>
@@ -62,7 +64,7 @@ const SignIn = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-primary"
             >
               Password
             </label>

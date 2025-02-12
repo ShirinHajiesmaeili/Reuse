@@ -58,6 +58,10 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(` Server running on http://localhost:${port}`);
+app.listen(port, (err) => {
+  if (err) {
+    console.error(`Error starting server: ${err.message}`);
+  } else {
+    console.log(`Server running on http://localhost:${port}`);
+  }
 });
