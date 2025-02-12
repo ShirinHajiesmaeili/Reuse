@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Detail from "./pages/Detail.jsx";
-import Detail from "./pages/Detail.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import Home from "./pages/Home.jsx";

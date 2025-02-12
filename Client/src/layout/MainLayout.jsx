@@ -47,11 +47,7 @@ const Layout = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="bg-gray-100 flex flex-col min-h-screen">
-=======
     <div className="bg-gray-100 min-h-screen flex flex-col">
->>>>>>> main
       {statusTab && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
