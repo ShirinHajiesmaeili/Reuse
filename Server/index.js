@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -8,6 +9,7 @@ import authRouter from "./routers/authRouter.js";
 import cartRouter from "./routers/cartRouter.js";
 import zipcodesRouter from "./routers/zipcodesRouter.js";
 import ErrorResponse from "./utils/ErrorResponse.js";
+
 
 connectDB();
 

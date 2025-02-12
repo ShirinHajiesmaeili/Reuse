@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="bottom-0 w-full footer bg-secondary text-base-content fontFamily:Rethink Sans, serif mt-auto p-9">
+    <footer className="w-full footer bg-secondary text-base-content fontFamily:Rethink Sans, serif mt-auto p-9">
       <nav>
         <h6 className="footer-title text-white">Company</h6>
         <a>
